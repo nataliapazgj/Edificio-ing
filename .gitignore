@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+
+# IDE / editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Unity
+unity/Library/
+unity/Temp/
+unity/Logs/
+unity/Obj/
+unity/Build/
+unity/Builds/
