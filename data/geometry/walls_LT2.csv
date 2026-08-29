@@ -3,3 +3,7 @@ M001,0.1,-1.095,0.1,1.825,0.6,LT2,B1,L4,2024_22-101-Model.pdf,M.H.A. e=60; eje A
 M003,0.1,14.325,0.1,17.24,0.6,LT2,B1,L4,2024_22-101-Model.pdf,M.H.A. e=60; eje A' con caras a -0.20/+0.40 m
 M002,0.1,0.15,1.85,0.15,0.3,LT2,B1,L4,2024_22-101-Model.pdf,M.H.A. e=30; cara exterior coincide con eje 1
 M004,0.1,16.0,1.85,16.0,0.3,LT2,B1,L4,2024_22-101-Model.pdf,M.H.A. e=30; cara exterior coincide con eje 3
+M005,28.205,3.18,28.205,6.275,0.25,LT2,B1,L4,2024_22-101-Model.pdf,Nucleo derecho: muro vertical izquierdo e=25 (idealizacion)
+M007,31.25,3.18,31.25,6.275,0.25,LT2,B1,L4,2024_22-101-Model.pdf,Nucleo derecho: muro vertical derecho e=25 (idealizacion)
+M006,28.205,3.18,31.25,3.18,0.3,LT2,B1,L4,2024_22-101-Model.pdf,Nucleo derecho: muro horizontal superior e=30 (idealizacion)
+M008,31.25,0.0,31.25,3.18,0.25,LT2,B1,L4,2024_22-101-Model.pdf,Nucleo derecho: prolongacion vertical superior e=25 hacia eje 1 (idealizacion)

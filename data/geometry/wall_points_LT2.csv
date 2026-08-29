@@ -7,3 +7,8 @@ M002_P1,0.1,0.15,A' + 0.10 m & 1 + 0.150 m,2024_22-101-Model.pdf,M002 extremo iz
 M002_P2,1.85,0.15,A' + 1.85 m & 1 + 0.150 m,2024_22-101-Model.pdf,M002 extremo derecho
 M004_P1,0.1,16.0,A' + 0.10 m & 3 - 0.150 m,2024_22-101-Model.pdf,M004 extremo izquierdo
 M004_P2,1.85,16.0,A' + 1.85 m & 3 - 0.150 m,2024_22-101-Model.pdf,M004 extremo derecho
+N005_P1,28.205,3.18,C' - 0.625 m & 1A - 1.085 m,2024_22-101-Model.pdf,M005 extremo inferior / M006 inicio
+N005_P2,28.205,6.275,C' - 0.625 m & 1A + 2.010 m,2024_22-101-Model.pdf,M005 extremo superior
+N007_P1,31.25,3.18,D & 1A - 1.085 m,2024_22-101-Model.pdf,M006 fin / M007 inicio / M008 extremo superior
+N007_P2,31.25,6.275,D & 1A + 2.010 m,2024_22-101-Model.pdf,M007 extremo superior
+N008_P1,31.25,0.0,D & 1,2024_22-101-Model.pdf,M008 extremo inferior (anclaje eje 1)
