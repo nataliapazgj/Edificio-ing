@@ -1,2 +1,5 @@
 section_id,type,b_m,h_m,t_m,notes
 P70x70,column,0.70,0.70,,Pilar 70x70 indicado en planta
+V60x80,beam,0.60,0.80,,Viga 60x80 visible en planta tipo LT2
+V40x80,beam,0.40,0.80,,Viga 40x80 visible en planta tipo LT2
+V30x80,beam,0.30,0.80,,Viga 30x80 visible en planta tipo LT2

@@ -1,1 +1,5 @@
 wall_id,x1_m,y1_m,x2_m,y2_m,thickness_m,stage,from_level,to_level,source,notes
+M001,0.1,-1.095,0.1,1.825,0.6,LT2,B1,L4,2024_22-101-Model.pdf,M.H.A. e=60; eje A' con caras a -0.20/+0.40 m
+M003,0.1,14.325,0.1,17.24,0.6,LT2,B1,L4,2024_22-101-Model.pdf,M.H.A. e=60; eje A' con caras a -0.20/+0.40 m
+M002,0.1,0.15,1.85,0.15,0.3,LT2,B1,L4,2024_22-101-Model.pdf,M.H.A. e=30; cara exterior coincide con eje 1
+M004,0.1,16.0,1.85,16.0,0.3,LT2,B1,L4,2024_22-101-Model.pdf,M.H.A. e=30; cara exterior coincide con eje 3

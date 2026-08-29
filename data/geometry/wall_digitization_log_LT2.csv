@@ -1,1 +1,5 @@
 wall_id,source,reference_description,status,notes
+M001,2024_22-101-Model.pdf,"pM001_P1(0.1000,-1.0950) -> pM001_P2(0.1000,1.8250) | L=2.9200 m, espesor=0.6000 m",saved,M.H.A. e=60; eje A' con caras a -0.20/+0.40 m
+M003,2024_22-101-Model.pdf,"pM003_P1(0.1000,14.3250) -> pM003_P2(0.1000,17.2400) | L=2.9150 m, espesor=0.6000 m",saved,M.H.A. e=60; eje A' con caras a -0.20/+0.40 m
+M002,2024_22-101-Model.pdf,"pM002_P1(0.1000,0.1500) -> pM002_P2(1.8500,0.1500) | L=1.7500 m, espesor=0.3000 m",saved,M.H.A. e=30; cara exterior coincide con eje 1
+M004,2024_22-101-Model.pdf,"pM004_P1(0.1000,16.0000) -> pM004_P2(1.8500,16.0000) | L=1.7500 m, espesor=0.3000 m",saved,M.H.A. e=30; cara exterior coincide con eje 3

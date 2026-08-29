@@ -1,10 +1,12 @@
 """Plan viewer 2D de la geometria LT2, para un nivel dado.
 
 Uso:
-    python src/plan_view_lt2.py L2
+    python src/plan_view_lt2.py L2 [--beam-labels]
 
 Lee los mismos archivos que el viewer 3D y dibuja, para el nivel indicado:
-grilla de ejes, columnas, muros y vigas (con IDs). Guarda:
+grilla de ejes, columnas, muros y vigas (con IDs). El beam_id se muestra
+centrado sobre cada viga; con --beam-labels se anade la seccion al texto.
+Guarda:
     figures/lt2_plan_<LEVEL>.png
 """
 
@@ -56,9 +58,10 @@ def spans(z, z_from, z_to, tol=1e-9):
 
 def main():
     if len(sys.argv) < 2:
-        print("Uso: python src/plan_view_lt2.py <LEVEL>   (ej: L2)")
+        print("Uso: python src/plan_view_lt2.py <LEVEL> [--beam-labels]   (ej: L2)")
         return 1
     level = sys.argv[1]
+    beam_labels = "--beam-labels" in sys.argv
 
     levels = pd.read_csv(GEOM / "levels.csv")
     grid_x = pd.read_csv(GEOM / "grid_x.csv")
@@ -185,7 +188,8 @@ def main():
                                  closed=True, alpha=0.9, label="viga"))
         else:
             ax.plot([x1, x2], [y1, y2], color="tab:green", lw=3.0, label="viga (sin seccion)")
-        ax.text((x1 + x2) / 2, (y1 + y2) / 2, str(b["beam_id"]),
+        label = str(b["beam_id"]) if not beam_labels else f"{b['beam_id']} ({b['section']})"
+        ax.text((x1 + x2) / 2, (y1 + y2) / 2, label,
                 ha="center", va="center", fontsize=6, color="black",
                 bbox=dict(facecolor="white", edgecolor="none", alpha=0.7))
 

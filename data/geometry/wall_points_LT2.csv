@@ -1,1 +1,9 @@
 point_id,x_m,y_m,axis_reference,source,notes
+M001_P1,0.1,-1.095,A' + 0.10 m & 1 - 1.095 m,2024_22-101-Model.pdf,M001 extremo y1
+M001_P2,0.1,1.825,A' + 0.10 m & 1 + 1.825 m,2024_22-101-Model.pdf,M001 extremo y2
+M003_P1,0.1,14.325,A' + 0.10 m & 2A + 2.440 m,2024_22-101-Model.pdf,M003 extremo y1
+M003_P2,0.1,17.24,A' + 0.10 m & 3 + 1.090 m,2024_22-101-Model.pdf,M003 extremo y2
+M002_P1,0.1,0.15,A' + 0.10 m & 1 + 0.150 m,2024_22-101-Model.pdf,M002 extremo izquierdo
+M002_P2,1.85,0.15,A' + 1.85 m & 1 + 0.150 m,2024_22-101-Model.pdf,M002 extremo derecho
+M004_P1,0.1,16.0,A' + 0.10 m & 3 - 0.150 m,2024_22-101-Model.pdf,M004 extremo izquierdo
+M004_P2,1.85,16.0,A' + 1.85 m & 3 - 0.150 m,2024_22-101-Model.pdf,M004 extremo derecho
