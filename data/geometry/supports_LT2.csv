@@ -1,0 +1,23 @@
+support_id,x_m,y_m,level,ux,uy,uz,rx,ry,rz,type,source,notes
+SUP_B1_01,0.100000,-1.095000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_02,0.100000,0.150000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_03,0.100000,1.825000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_04,0.100000,14.325000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_05,0.100000,16.000000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_06,0.100000,17.240000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_07,1.850000,0.150000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_08,1.850000,16.000000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_09,3.750000,8.900000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_10,11.250000,0.000000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_11,11.250000,8.900000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_12,11.250000,16.150000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_13,21.250000,0.000000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_14,21.250000,8.900000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_15,21.250000,16.150000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_16,28.205000,3.180000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_17,28.205000,6.275000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_18,31.250000,0.000000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_19,31.250000,3.180000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_20,31.250000,6.275000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_21,31.250000,8.900000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.
+SUP_B1_22,31.250000,16.150000,B1,1,1,1,1,1,1,fixed,supuesto_modelacion,Base del modelo idealizada como empotrada en B1; interaccion suelo-estructura y flexibilidad de fundaciones fuera del alcance actual.

@@ -1,0 +1,6 @@
+master_id,level,x_m,y_m,z_m,method
+NM_L1,L1,15.675000,8.072500,-4.010000,geometric_bbox_center
+NM_L2,L2,15.675000,8.072500,-0.050000,geometric_bbox_center
+NM_L3,L3,15.675000,8.072500,3.910000,geometric_bbox_center
+NM_L4,L4,15.675000,8.072500,7.870000,geometric_bbox_center
+NM_ROOF,ROOF,15.675000,8.072500,11.830000,geometric_bbox_center
