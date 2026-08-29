@@ -7,12 +7,14 @@ Lee exclusivamente los archivos de geometria y secciones:
   data/geometry/grid_y.csv
   data/geometry/vertical_elements_LT2.csv
   data/geometry/walls_LT2.csv
+  data/geometry/beams_LT2.csv
   data/sections/sections_LT2.csv
 
 No hardcodea coordenadas: toda la geometria proviene de esos CSVs.
 Reporta por consola cualquier referencia a ejes o niveles inexistentes.
 """
 
+import math
 import sys
 from pathlib import Path
 
@@ -37,6 +39,7 @@ def load_data():
     grid_y = pd.read_csv(GEOM / "grid_y.csv")
     vertical = pd.read_csv(GEOM / "vertical_elements_LT2.csv")
     walls = pd.read_csv(GEOM / "walls_LT2.csv")
+    beams = pd.read_csv(GEOM / "beams_LT2.csv")
     sections = pd.read_csv(SECT / "sections_LT2.csv")
 
     x_axis = {str(ax): float(x) for ax, x in zip(grid_x["axis_id"], grid_x["x_m"])}
@@ -51,11 +54,11 @@ def load_data():
             sections.get("t_m", [np.nan] * len(sections)),
         )
     }
-    return levels, grid_x, grid_y, vertical, walls, sections, x_axis, y_axis, z_level, section_geom
+    return levels, grid_x, grid_y, vertical, walls, beams, x_axis, y_axis, z_level, section_geom
 
 
-def check_references(vertical, walls, x_axis, y_axis, z_level):
-    """Reporta referencias a ejes o niveles inexistentes. Devuelve True si hay errores."""
+def check_references(vertical, walls, beams, x_axis, y_axis, z_level, section_geom):
+    """Reporta referencias a ejes, niveles o secciones inexistentes."""
     problems = []
 
     for _, e in vertical.iterrows():
@@ -69,6 +72,8 @@ def check_references(vertical, walls, x_axis, y_axis, z_level):
         for tag, ref in (("from_level", str(e["from_level"])), ("to_level", str(e["to_level"]))):
             if ref not in z_level:
                 problems.append(f"{eid}: nivel {tag} '{ref}' no existe en levels.csv")
+        if str(e["section"]) not in section_geom:
+            problems.append(f"{eid}: seccion '{e['section']}' no existe en sections_LT2.csv")
 
     for _, w in walls.iterrows():
         wid = str(w["wall_id"])
@@ -76,12 +81,19 @@ def check_references(vertical, walls, x_axis, y_axis, z_level):
             if ref not in z_level:
                 problems.append(f"{wid}: nivel {tag} '{ref}' no existe en levels.csv")
 
+    for _, b in beams.iterrows():
+        bid = str(b["beam_id"])
+        if str(b["level"]) not in z_level:
+            problems.append(f"{bid}: nivel '{b['level']}' no existe en levels.csv")
+        if str(b["section"]) not in section_geom:
+            problems.append(f"{bid}: seccion '{b['section']}' no existe en sections_LT2.csv")
+
     if problems:
-        print("ERRORES - referencias a ejes o niveles inexistentes:")
+        print("ERRORES - referencias a ejes, niveles o secciones inexistentes:")
         for p in problems:
             print(f"  - {p}")
     else:
-        print("OK - todas las referencias a ejes y niveles existen.")
+        print("OK - todas las referencias a ejes, niveles y secciones existen.")
     return len(problems) > 0
 
 
@@ -113,10 +125,41 @@ def draw_global_axes(ax, z_origin):
         ax.text(dx * 1.15, dy * 1.15, z_origin + dz * 1.15, name, color=colors[name], fontsize=12, weight="bold")
 
 
+def draw_strip_box(ax, x1, y1, x2, y2, width, z0, z1, color, lw=2.0):
+    """Caja 3D que recorre el segmento (x1,y1)-(x2,y2) en planta, con ancho
+    transversal `width`, extendida verticalmente de z0 a z1 (caja envolvente)."""
+    dx, dy = x2 - x1, y2 - y1
+    length = max(math.hypot(dx, dy), 1e-12)
+    ux, uy = dx / length, dy / length
+    nx, ny = -uy, ux
+    cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
+    corners = [
+        (cx - ux * length / 2 - nx * width / 2, cy - uy * length / 2 - ny * width / 2),
+        (cx + ux * length / 2 - nx * width / 2, cy + uy * length / 2 - ny * width / 2),
+        (cx + ux * length / 2 + nx * width / 2, cy + uy * length / 2 + ny * width / 2),
+        (cx - ux * length / 2 + nx * width / 2, cy - uy * length / 2 + ny * width / 2),
+    ]
+    x0 = min(c[0] for c in corners)
+    x1b = max(c[0] for c in corners)
+    y0 = min(c[1] for c in corners)
+    y1b = max(c[1] for c in corners)
+    draw_box(ax, x0, y0, x1b, y1b, z0, z1, color, lw)
+
+
+def section_dims(section_geom, sid):
+    """Dimensiones (b, h) de una seccion; None si no esta definida o es NaN."""
+    if sid not in section_geom:
+        return None
+    b, h, _t = section_geom[sid]
+    if np.isnan(b) or np.isnan(h):
+        return None
+    return b, h
+
+
 def main():
     show = "--show" in sys.argv
     (
-        levels, grid_x, grid_y, vertical, walls, _sections,
+        levels, grid_x, grid_y, vertical, walls, beams,
         x_axis, y_axis, z_level, section_geom,
     ) = load_data()
 
@@ -126,8 +169,9 @@ def main():
     print(f"Ejes Y           : {len(grid_y)}")
     print(f"Elementos vert.  : {len(vertical)}")
     print(f"Muros            : {len(walls)}")
+    print(f"Vigas            : {len(beams)}")
     print()
-    check_references(vertical, walls, x_axis, y_axis, z_level)
+    check_references(vertical, walls, beams, x_axis, y_axis, z_level, section_geom)
     print()
 
     xmin, xmax = grid_x["x_m"].min(), grid_x["x_m"].max()
@@ -163,8 +207,9 @@ def main():
         z1, z2 = z_level[fl], z_level[tl]
 
         sid = str(col["section"])
-        if sid in section_geom:
-            b, h, _t = section_geom[sid]
+        dims = section_dims(section_geom, sid)
+        if dims is not None:
+            b, h = dims
             draw_box(ax, x - b / 2, y - h / 2, x + b / 2, y + h / 2, z1, z2,
                      color="tab:blue", lw=2.0)
         else:
@@ -173,33 +218,35 @@ def main():
 
         ax.text(x + 0.4, y + 0.4, z2, str(col["element_id"]), fontsize=7, color="tab:blue")
 
-    # Muros: caja horizontal con espesor
-    if len(walls) > 0:
-        for _, w in walls.iterrows():
-            fl = str(w["from_level"])
-            tl = str(w["to_level"])
-            if fl not in z_level or tl not in z_level:
-                continue
-            x1, y1, x2, y2 = float(w["x1_m"]), float(w["y1_m"]), float(w["x2_m"]), float(w["y2_m"])
-            t = float(w["thickness_m"])
-            dx, dy = x2 - x1, y2 - y1
-            length = max(np.hypot(dx, dy), 1e-9)
-            ux, uy = dx / length, dy / length          # vector longitudinal
-            nx, ny = -uy, ux                          # vector transversal (espesor)
-            cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
-            x0 = cx - ux * length / 2 - nx * t / 2
-            y0 = cy - uy * length / 2 - ny * t / 2
-            x1b = cx + ux * length / 2 - nx * t / 2
-            y1b = cy + uy * length / 2 - ny * t / 2
-            x2b = cx + ux * length / 2 + nx * t / 2
-            y2b = cy + uy * length / 2 + ny * t / 2
-            x3b = cx - ux * length / 2 + nx * t / 2
-            y3b = cy - uy * length / 2 + ny * t / 2
-            draw_box(ax, min(x0, x1b, x2b, x3b), min(y0, y1b, y2b, y3b),
-                     max(x0, x1b, x2b, x3b), max(y0, y1b, y2b, y3b),
-                     z_level[fl], z_level[tl], color="tab:orange", lw=2.0)
-            ax.text((x1 + x2) / 2, (y1 + y2) / 2, z_level[tl], str(w["wall_id"]),
-                    fontsize=7, color="tab:orange")
+    # Muros: prisma con espesor y ID
+    for _, w in walls.iterrows():
+        fl = str(w["from_level"])
+        tl = str(w["to_level"])
+        if fl not in z_level or tl not in z_level:
+            continue
+        x1, y1, x2, y2 = (float(w[c]) for c in ("x1_m", "y1_m", "x2_m", "y2_m"))
+        t = float(w["thickness_m"])
+        draw_strip_box(ax, x1, y1, x2, y2, t, z_level[fl], z_level[tl],
+                       color="tab:orange", lw=2.0)
+        ax.text((x1 + x2) / 2, (y1 + y2) / 2, z_level[tl], str(w["wall_id"]),
+                fontsize=7, color="tab:orange")
+
+    # Vigas: prisma en el nivel indicado; sin seccion se dibujan como linea
+    for _, b in beams.iterrows():
+        lv = str(b["level"])
+        if lv not in z_level:
+            continue
+        x1, y1, x2, y2 = (float(b[c]) for c in ("x1_m", "y1_m", "x2_m", "y2_m"))
+        z = z_level[lv]
+        dims = section_dims(section_geom, str(b["section"]))
+        if dims is not None:
+            bw, bh = dims
+            draw_strip_box(ax, x1, y1, x2, y2, bw, z, z + bh,
+                           color="tab:green", lw=2.0)
+        else:
+            ax.plot([x1, x2], [y1, y2], [z, z], color="tab:green", lw=3.0)
+        ax.text((x1 + x2) / 2, (y1 + y2) / 2, z, str(b["beam_id"]),
+                fontsize=7, color="tab:green")
 
     # Niveles (piezas de planta en el contorno del edificio)
     for _, lv in levels.iterrows():
