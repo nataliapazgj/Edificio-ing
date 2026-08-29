@@ -1,11 +1,11 @@
 element_id,type,axis_x,axis_y,section,stage,from_level,to_level,notes
-P001,column,B,1,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P002,column,C,1,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P003,column,D,1,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P004,column,A,2,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P005,column,B,2,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P006,column,C,2,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P007,column,D,2,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P008,column,B,3,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P009,column,C,3,P70x70,LT2,B1,L4,Pilar visible en planta tipo
-P010,column,D,3,P70x70,LT2,B1,L4,Pilar visible en planta tipo
+P001,column,B,1,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P002,column,C,1,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P003,column,D,1,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P004,column,A,2,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P005,column,B,2,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P006,column,C,2,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P007,column,D,2,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P008,column,B,3,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P009,column,C,3,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo
+P010,column,D,3,P70x70,LT2,B1,ROOF,Pilar visible en planta tipo

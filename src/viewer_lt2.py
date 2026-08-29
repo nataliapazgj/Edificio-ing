@@ -42,6 +42,12 @@ def load_data():
     beams = pd.read_csv(GEOM / "beams_LT2.csv")
     sections = pd.read_csv(SECT / "sections_LT2.csv")
 
+    col_seg = wall_seg = None
+    if (GEOM / "column_segments_LT2.csv").exists():
+        col_seg = pd.read_csv(GEOM / "column_segments_LT2.csv")
+    if (GEOM / "wall_segments_LT2.csv").exists():
+        wall_seg = pd.read_csv(GEOM / "wall_segments_LT2.csv")
+
     x_axis = {str(ax): float(x) for ax, x in zip(grid_x["axis_id"], grid_x["x_m"])}
     y_axis = {str(ay): float(y) for ay, y in zip(grid_y["axis_id"], grid_y["y_m"])}
     z_level = {str(nm): float(z) for nm, z in zip(levels["name"], levels["z_m"])}
@@ -54,7 +60,7 @@ def load_data():
             sections.get("t_m", [np.nan] * len(sections)),
         )
     }
-    return levels, grid_x, grid_y, vertical, walls, beams, x_axis, y_axis, z_level, section_geom
+    return levels, grid_x, grid_y, vertical, walls, beams, col_seg, wall_seg, x_axis, y_axis, z_level, section_geom
 
 
 def check_references(vertical, walls, beams, x_axis, y_axis, z_level, section_geom):
@@ -160,7 +166,7 @@ def main():
     show = "--show" in sys.argv
     (
         levels, grid_x, grid_y, vertical, walls, beams,
-        x_axis, y_axis, z_level, section_geom,
+        col_seg, wall_seg, x_axis, y_axis, z_level, section_geom,
     ) = load_data()
 
     print("=== LT2 VIEWER ===")
@@ -170,6 +176,10 @@ def main():
     print(f"Elementos vert.  : {len(vertical)}")
     print(f"Muros            : {len(walls)}")
     print(f"Vigas            : {len(beams)}")
+    if col_seg is not None:
+        print(f"Col segments     : {len(col_seg)} (derivados)")
+    if wall_seg is not None:
+        print(f"Wall segments    : {len(wall_seg)} (derivados)")
     print()
     check_references(vertical, walls, beams, x_axis, y_axis, z_level, section_geom)
     print()
@@ -191,45 +201,73 @@ def main():
         ax.plot([xmin, xmax], [ayv, ayv], [z_grid, z_grid], color="gray", lw=0.5, alpha=0.6)
 
     # Columnas: prisma segun seccion con ID en el tope
-    columns = vertical[vertical["type"] == "column"] if "type" in vertical else vertical
-    for _, col in columns.iterrows():
-        axv = str(col["axis_x"])
-        ayv = str(col["axis_y"])
-        if axv not in x_axis or ayv not in y_axis:
-            continue
-        fl = str(col["from_level"])
-        tl = str(col["to_level"])
-        if fl not in z_level or tl not in z_level:
-            continue
+    if col_seg is not None:
+        for _, seg in col_seg.iterrows():
+            fl = str(seg["from_level"])
+            tl = str(seg["to_level"])
+            if fl not in z_level or tl not in z_level:
+                continue
+            x, y = float(seg["x_m"]), float(seg["y_m"])
+            z1, z2 = z_level[fl], z_level[tl]
+            sid = str(seg["section"])
+            dims = section_dims(section_geom, sid)
+            if dims is not None:
+                b, h = dims
+                draw_box(ax, x - b / 2, y - h / 2, x + b / 2, y + h / 2, z1, z2,
+                         color="tab:blue", lw=2.0)
+            else:
+                ax.plot([x, x], [y, y], [z1, z2], color="tab:blue", lw=2.0)
+    else:
+        columns = vertical[vertical["type"] == "column"] if "type" in vertical else vertical
+        for _, col in columns.iterrows():
+            axv = str(col["axis_x"])
+            ayv = str(col["axis_y"])
+            if axv not in x_axis or ayv not in y_axis:
+                continue
+            fl = str(col["from_level"])
+            tl = str(col["to_level"])
+            if fl not in z_level or tl not in z_level:
+                continue
 
-        x = x_axis[axv]
-        y = y_axis[ayv]
-        z1, z2 = z_level[fl], z_level[tl]
+            x = x_axis[axv]
+            y = y_axis[ayv]
+            z1, z2 = z_level[fl], z_level[tl]
 
-        sid = str(col["section"])
-        dims = section_dims(section_geom, sid)
-        if dims is not None:
-            b, h = dims
-            draw_box(ax, x - b / 2, y - h / 2, x + b / 2, y + h / 2, z1, z2,
-                     color="tab:blue", lw=2.0)
-        else:
-            print(f"  - {col['element_id']}: seccion '{sid}' no definida, dibujando como linea")
-            ax.plot([x, x], [y, y], [z1, z2], color="tab:blue", lw=2.0)
+            sid = str(col["section"])
+            dims = section_dims(section_geom, sid)
+            if dims is not None:
+                b, h = dims
+                draw_box(ax, x - b / 2, y - h / 2, x + b / 2, y + h / 2, z1, z2,
+                         color="tab:blue", lw=2.0)
+            else:
+                print(f"  - {col['element_id']}: seccion '{sid}' no definida, dibujando como linea")
+                ax.plot([x, x], [y, y], [z1, z2], color="tab:blue", lw=2.0)
 
-        ax.text(x + 0.4, y + 0.4, z2, str(col["element_id"]), fontsize=7, color="tab:blue")
+            ax.text(x + 0.4, y + 0.4, z2, str(col["element_id"]), fontsize=7, color="tab:blue")
 
     # Muros: prisma con espesor y ID
-    for _, w in walls.iterrows():
-        fl = str(w["from_level"])
-        tl = str(w["to_level"])
-        if fl not in z_level or tl not in z_level:
-            continue
-        x1, y1, x2, y2 = (float(w[c]) for c in ("x1_m", "y1_m", "x2_m", "y2_m"))
-        t = float(w["thickness_m"])
-        draw_strip_box(ax, x1, y1, x2, y2, t, z_level[fl], z_level[tl],
-                       color="tab:orange", lw=2.0)
-        ax.text((x1 + x2) / 2, (y1 + y2) / 2, z_level[tl], str(w["wall_id"]),
-                fontsize=7, color="tab:orange")
+    if wall_seg is not None:
+        for _, seg in wall_seg.iterrows():
+            fl = str(seg["from_level"])
+            tl = str(seg["to_level"])
+            if fl not in z_level or tl not in z_level:
+                continue
+            x1, y1, x2, y2 = (float(seg[c]) for c in ("x1_m", "y1_m", "x2_m", "y2_m"))
+            t = float(seg["thickness_m"])
+            draw_strip_box(ax, x1, y1, x2, y2, t, z_level[fl], z_level[tl],
+                           color="tab:orange", lw=2.0)
+    else:
+        for _, w in walls.iterrows():
+            fl = str(w["from_level"])
+            tl = str(w["to_level"])
+            if fl not in z_level or tl not in z_level:
+                continue
+            x1, y1, x2, y2 = (float(w[c]) for c in ("x1_m", "y1_m", "x2_m", "y2_m"))
+            t = float(w["thickness_m"])
+            draw_strip_box(ax, x1, y1, x2, y2, t, z_level[fl], z_level[tl],
+                           color="tab:orange", lw=2.0)
+            ax.text((x1 + x2) / 2, (y1 + y2) / 2, z_level[tl], str(w["wall_id"]),
+                    fontsize=7, color="tab:orange")
 
     # Vigas: prisma en el nivel indicado; sin seccion se dibujan como linea
     for _, b in beams.iterrows():
