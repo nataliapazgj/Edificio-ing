@@ -26,6 +26,12 @@ declarado ningún **sistema de unidades de fuerza** para el análisis. No hay f'
 kN/carga ni módulos en textos, CSV, código, planos ni historial git. La única unidad consistente
 usada en la geometría es el **metro (m)**.
 
+> **Actualización (ver `data/materials_LT2.csv`):** se adoptó **G25 (f'c = 25 MPa)** como
+> **SUPUESTO_MODELO_USUARIO** para el hormigón estructural del elemento elástico lineal. Este valor
+> **NO fue confirmado documentalmente en los planos revisados** (00x, 10x, 20x, 30x, 40x, 50x);
+> la resistencia aparece solo en dibujos vectoriales sin capa de texto y no se pudo verificar por
+> software/OCR. Se documenta explícitamente como supuesto de modelación, no como dato del plano.
+
 ## Conclusión 2 — No hay convención de muro lineal equivalente
 No existe en el repositorio una convención explícita para modelar los muros M.H.A. como elementos
 lineales equivalentes en un modelo de análisis. La etiqueta "(idealizacion)" que aparece en
@@ -56,14 +62,36 @@ rigidez/fisuración.
 
 ## Información que falta para continuar
 1. **f'c del hormigón o E directo**, y unidades de presión (MPa, kg/cm²).
+   - Estado: se adoptó **G25 (f'c=25 MPa)** como **supuesto de modelación**; pendiente de
+     confirmar documentalmente en planos/curso.
 2. **nu** (o justificación de un valor asumido) y **unidad de fuerza** del modelo (kN, tonf…).
+   - Estado: se adoptó **ν=0.20** como **supuesto de modelación**; unidades del modelo en
+     kN/m² (esfuerzo) con longitudes en m y fuerzas en kN.
 3. **Convención de modelación de muros M.H.A.**: tipo de elemento lineal equivalente, sección
    (L_eff × t), tratamiento del eje no-centroidal (M001/M003) y criterios de rigidez/fisuración.
+   - Estado: **pendiente**; no se materializan muros hasta definirlo.
 4. **Planos E300–E305**: están referenciados en `data/geometry/sources_LT2.csv`
    (elevaciones) pero **no están disponibles en el repositorio**; podrían contener notas útiles
    (rótulos o especificaciones de materiales) y conviene solicitarlos o confirmar su inexistencia.
+
+## Material adoptado (supuesto de modelación)
+
+| Parámetro | Valor | Origen |
+|---|---|---|
+| Calidad | **G25** (f'c = 25 MPa) | `SUPUESTO_MODELO_USUARIO` (no confirmado en planos) |
+| E | 23 500 000 kN/m² | `Ec = 4700·√f'c` (MPa) → 23500 MPa (`ETOG_Ec_4700sqrt_fc`) |
+| ν | 0.20 | `SUPUESTO_MODELO` |
+| G | 9 791 666.67 kN/m² | `G = E / [2(1+ν)]` |
+| Estado | `ASSUMED_FOR_MODEL` | modelo elástico lineal |
+
+Sistema de unidades del modelo: longitud **m**, fuerza **kN**, esfuerzo/módulo **kN/m²**.
 
 ## Decisión de proyecto
 No inventar parámetros ni materializar elementos hasta disponer de información respaldada por el
 curso/docente. Ningún valor de E, nu o G será adoptado de otros proyectos, ejemplos o benchmarks.
 Todo cambio posterior en materiales o muros se acompañará de su verificación y del archivo fuente.
+
+> **Actualización:** el material `CONC_G25` se crea en `data/materials_LT2.csv` solo como
+> supuesto de modelación (no se confirma documentalmente). `build_opensees_model.py` materializa
+> vigas convencionales, columnas y V.I. prismáticas (VI15x70/68/76); **no** materializa VI-05
+> (VI15xVAR) ni muros (pendientes). No se aplican cargas ni análisis gravitacional.

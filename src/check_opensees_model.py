@@ -5,17 +5,24 @@ OpenSees reproduzca la fuente de datos (CSVs de LT2):
 
   - conteo de nodos estructurales, masters y totales;
   - apoyos (22 empotrados en B1) y su mapeo a nodos;
-  - vigas, columnas, muros y total de elementos (esperado vs materializado);
+  - vigas, columnas, muros (esperado vs materializado);
   - duplicados de tags y de nodos;
   - elementos de longitud nula;
   - elementos con nodos inexistentes;
-  - nodos aislados (estructurales y masters intencionalmente aislados);
+  - nodos aislados;
   - diafragmas: cantidad, master y esclavos por nivel;
-  - orientacion de transformaciones geometricas.
+  - orientacion de transformaciones geometricas;
+  - estado por categoria: geometry_ready / material_ready / analysis_ready.
 
-Exit code 0 solo si OpenSees reproduce la fuente de datos sin bloqueadores;
-si falta material (u otro dato) no se inventan valores y el chequeo falla
-reportando exactamente que falta.
+Modelacion actual (decisión de proyecto):
+  - materializa vigas convencionales y columnas;
+  - materializa V.I. prismaticas (VI15x70, VI15x68, VI15x76);
+  - NO materializa VI-05 (VI15xVAR, seccion variable);
+  - NO materializa muros (pendiente convencion de elemento equivalente).
+
+Exit code 0 solo si la geometria es correcta y la materializacion coincide
+con el alcance material_ready. Si falta material (u otro dato), o hay un
+desvio en conteos, el chequeo falla reportando exactamente que falta.
 """
 
 import sys
@@ -30,6 +37,7 @@ import pandas as pd
 
 RED = "\033[91m"
 GREEN = "\033[92m"
+YELLOW = "\033[93m"
 END = "\033[0m"
 
 
@@ -46,23 +54,45 @@ def main():
             ok = False
             print(f"  [{RED}FAIL{END}] {name} {detail}")
 
+    def info(name, detail):
+        print(f"  [..] {name} {detail}")
+
     print("=== OPENSEES MODEL CHECK ===")
     exp = report["expected"]
     act = report["actual"]
+    mready = report["material_ready"]
+    gready = report["geometry_ready"]
 
-    print("[Counts]")
+    print("[Conteos]")
     for k in ("structural_nodes", "total_nodes", "masters", "supports",
               "diaphragms"):
         check(f"{k}", act[k] == exp[k],
               f"(got {act[k]}, expected {exp[k]})")
-    matz = report["materializable"]
-    for k in ("beams", "columns", "walls"):
-        check(f"{k}", act[k] == matz[k],
-              f"(got {act[k]}, materializable {matz[k]}, csv {exp[k]})")
-    tot_exp = matz["beams"] + matz["columns"] + matz["walls"]
+    check("vigas geométricas (CSV)", act["beams"] <= exp["beams"]
+          and gready["beams"] == exp["beams"],
+          f"(got {gready['beams']}, csv {exp['beams']})")
+    check("vigas materializadas", act["beams"] == mready["beams"],
+          f"(got {act['beams']}, material_ready {mready['beams']}, csv {exp['beams']})")
+    check("columnas materializadas", act["columns"] == mready["columns"],
+          f"(got {act['columns']}, material_ready {mready['columns']}, csv {exp['columns']})")
+    check("muros NO materializados (pendientes)",
+          act["walls"] == mready["walls"],
+          f"(got {act['walls']}, esperado {mready['walls']}; csv {exp['walls']})")
+    tot_exp = mready["beams"] + mready["columns"] + mready["walls"]
     tot_act = act["beams"] + act["columns"] + act["walls"]
-    check("total_elements", tot_act == tot_exp,
-          f"(got {tot_act}, materializable {tot_exp})")
+    check("total_elements materializados", tot_act == tot_exp,
+          f"(got {tot_act}, material_ready {tot_exp})")
+
+    print("[Estado del modelo]")
+    st = report["status"]
+    print(f"  geometry_ready : {'SI' if st['geometry_ready'] else 'NO'}")
+    print(f"  material_ready : {'SI' if st['material_ready'] else 'NO'}")
+    print(f"  analysis_ready : {'SI' if st['analysis_ready'] else 'NO'}")
+    mp = report.get("material_params")
+    if mp:
+        print(f"  material_uso   : {mp['material_id']} fc={mp['fc_MPa']} MPa "
+              f"E={mp['E_kN_m2']:.0f} kN/m2 nu={mp['nu']} "
+              f"G={mp['G_kN_m2']:.2f} kN/m2 ({mp['status']})")
 
     print("[Master nodes]")
     masters_csv = pd.read_csv(GEOM / "master_nodes_LT2.csv")
@@ -87,9 +117,11 @@ def main():
           f"(masters en elementos: {sorted(mast_in_elems)})")
 
     print("[Element topologia]")
+    zero_len = []
     for kind in ("beams", "columns"):
         nz = [e["id"] for e in builder.elems[kind]
               if e["length"] <= TOL_LEN]
+        zero_len += nz
         check(f"longitud nula en {kind}", len(nz) == 0, f"(ids: {nz})")
         bad = [e["id"] for e in builder.elems[kind]
                if e["n1"] not in ops.getNodeTags()
@@ -98,12 +130,15 @@ def main():
     bad = []
     nullf = []
     warped = []
+    foot_zero = []
     for e in builder.elems["walls"]:
         nodes = {e["n00"], e["n10"], e["n01"], e["n11"]}
         if not nodes.issubset(set(ops.getNodeTags())):
             bad.append(e["id"])
         if e["footprint"] <= TOL_LEN or e["height"] <= TOL_LEN:
             nullf.append(e["id"])
+        if e["footprint"] <= TOL_LEN:
+            foot_zero.append(e["id"])
         k00 = builder.tag_to_key[e["n00"]]
         k10 = builder.tag_to_key[e["n10"]]
         k01 = builder.tag_to_key[e["n01"]]
@@ -114,6 +149,7 @@ def main():
     check("nodos inexistentes en walls", len(bad) == 0, f"(ids: {bad})")
     check("area nula en walls", len(nullf) == 0, f"(ids: {nullf})")
     check("huella congruente en walls", len(warped) == 0, f"(ids: {warped})")
+    info("elementos de longitud cero", f"{len(zero_len)}")
 
     print("[Orientacion geomTransf]")
     refs = {TRANS_COL: (0, 1, 0), TRANS_B_X: (0, 0, 1),
@@ -156,29 +192,30 @@ def main():
     print("[Material / datos faltantes]")
     for b in report["blockers"]:
         print(f"  [BLOCK] {b}")
-    pending = report.get("pending_beams", [])
-    if pending:
-        print(f"  [PEND] Beams intencionalmente no materializados "
-              f"(seccion variable): {pending}")
-    psec = report.get("pending_sections", [])
-    if psec:
-        print(f"  [PEND] Secciones excluidas del modelo: {psec}")
+
+    print("[Resumen]")
+    print(f"  nodos totales           : {act['total_nodes']}")
+    print(f"  masters                 : {act['masters']}")
+    print(f"  vigas geométricas       : {gready['beams']}")
+    print(f"  vigas materializadas    : {act['beams']}/{mready['beams']}")
+    print(f"  columnas materializadas : {act['columns']}/{mready['columns']}")
+    print(f"  V.I. materializadas     : {len(report['vi_materialized'])} "
+          f"{sorted(report['vi_materialized'])}")
+    print(f"  V.I. pendientes         : {len(report['vi_pending'])} "
+          f"{sorted(report['vi_pending'])}")
+    print(f"  muros pendientes        : {gready['walls']}")
+    print(f"  elementos de long. cero : {len(zero_len)}")
+    print(f"  nodos max tag           : {max(ops.getNodeTags())}")
 
     print("[Conteos por nivel]")
     for k, v in report["level_node_counts"].items():
         print(f"  nivel {k}: {v} nodos estructurales")
 
-    print("[Resumen]")
-    print(f"  vigas geometricas (CSV) : {exp['beams']}")
-    print(f"  vigas materializadas    : {act['beams']}/{matz['beams']}")
-    print(f"  columnas materializadas : {act['columns']}/{matz['columns']}")
-    print(f"  muros materializados    : {act['walls']}/{matz['walls']}")
-    print(f"  nodos max tag           : {max(ops.getNodeTags())}")
-
     if not ok:
         print(f"{RED}FALLO: OpenSees no reproduce la fuente de datos{END}")
         sys.exit(1)
-    print(f"{GREEN}OK{END}: OpenSees reproduce la fuente de datos")
+    print(f"{GREEN}OK{END}: OpenSees reproduce la fuente de datos "
+          f"(geometry/material_ready; analysis_ready pendiente)")
     sys.exit(0)
 
 

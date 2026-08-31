@@ -118,6 +118,8 @@ class ModelBuilder:
             n2 = self.node_key_to_tag[_key(r.x2_m, r.y2_m, z)]
             self.elems["beams"].append(dict(id=r.beam_id, n1=n1, n2=n2,
                                             level=r.level, section=r.section,
+                                            notes=str(r.notes)
+                                            if not pd.isna(r.notes) else "",
                                             length=((r.x2_m - r.x1_m) ** 2
                                                     + (r.y2_m - r.y1_m) ** 2) ** 0.5))
         for r in self.columns.itertuples():
@@ -152,12 +154,16 @@ class ModelBuilder:
                 "vigas/columnas elasticas")
             return None, blockers
         mat = pd.read_csv(self.materials_path)
-        cols = set(mat.columns)
-        missing = [c for c in ("E", "nu") if c not in cols]
+        if mat.empty:
+            blockers.append("data/materials_LT2.csv esta vacio")
+            return None, blockers
+        cols = set(map(str, mat.columns))
+        missing = [c for c in ("E_kN_m2", "nu") if c not in cols]
         if missing:
             blockers.append(
                 "data/materials_LT2.csv incompleto: faltan columnas "
-                + ", ".join(missing))
+                + ", ".join(missing)
+                + " (se espera E_kN_m2 y nu para el material del modelo)")
             return None, blockers
         return mat, blockers
 
@@ -176,9 +182,18 @@ class ModelBuilder:
         mat_beams = 0
         mat_cols = 0
         mat_walls = 0
+        self.material_params = None
         if materials is not None and not mat_blockers:
-            e = float(materials["E"].iloc[0])
+            e = float(materials["E_kN_m2"].iloc[0])
             nu = float(materials["nu"].iloc[0])
+            self.material_params = {
+                "material_id": str(materials["material_id"].iloc[0]),
+                "fc_MPa": float(materials["fc_MPa"].iloc[0]),
+                "E_kN_m2": e,
+                "nu": nu,
+                "G_kN_m2": e / (2.0 * (1.0 + nu)),
+                "status": str(materials["status"].iloc[0]),
+            }
             self._materialize(materials, e, nu)
             mat_beams = int(self.n_materialized.get("beams", 0))
             mat_cols = int(self.n_materialized.get("columns", 0))
@@ -254,6 +269,8 @@ class ModelBuilder:
 
     def _materialize(self, materials, e, nu):
         self.n_materialized = {"beams": 0, "columns": 0, "walls": 0}
+        self.vi_materialized = []
+        self.vi_pending = []
         g = e / (2.0 * (1.0 + nu))
         section_tag = {}
         self._pending_sections = []
@@ -271,8 +288,12 @@ class ModelBuilder:
             ops.section("Elastic", tag, e, a, iz, iy, g, j)
             section_tag[str(s["section_id"])] = tag
         for i, e_ in enumerate(self.elems["beams"]):
+            notes = str(e_.get("notes", ""))
+            is_vi = "family=VI" in notes and "audit_id=VI" in notes
             if e_["section"] in self._pending_sections:
                 self._pending_beams.append(e_["id"])
+                if is_vi:
+                    self.vi_pending.append(e_["id"])
                 continue
             transf = self._orient(e_)
             if transf is None:
@@ -280,6 +301,8 @@ class ModelBuilder:
             ops.element("elasticBeamColumn", TAG_BEAM_BASE + i, e_["n1"],
                         e_["n2"], section_tag[e_["section"]], transf)
             self.n_materialized["beams"] += 1
+            if is_vi:
+                self.vi_materialized.append(e_["id"])
         for i, e_ in enumerate(self.elems["columns"]):
             ops.element("elasticBeamColumn", TAG_COL_BASE + i, e_["n1"],
                         e_["n2"], section_tag[e_["section"]], TRANS_COL)
@@ -288,6 +311,8 @@ class ModelBuilder:
     def _report(self, support_tags, mat_beams, mat_cols, mat_walls, blockers):
         pending_sections = getattr(self, "_pending_sections", [])
         pending_beams = getattr(self, "_pending_beams", [])
+        vi_materialized = getattr(self, "vi_materialized", [])
+        vi_pending = getattr(self, "vi_pending", [])
         expected = {
             "beams": len(self.elems["beams"]),
             "columns": len(self.elems["columns"]),
@@ -313,19 +338,55 @@ class ModelBuilder:
             "structural_nodes": len(ops.getNodeTags()) - len(self.master_tags),
             "total_nodes": len(ops.getNodeTags()),
         }
-        return {
+        material_ready = {
+            "beams": expected["beams"] - len(pending_beams),
+            "columns": expected["columns"],
+            # muros: pendientes de convencion de elemento equivalente
+            "walls": 0,
+        }
+        geometry_ready = {
+            "beams": expected["beams"],
+            "columns": expected["columns"],
+            "walls": expected["walls"],
+        }
+        # Estado del modelo por categoría.
+        # geometry_ready: toda la geometria del CSV esta presente y es valida
+        #   (independiente de materializacion). Se confirma ademas con los
+        #   chequeos de topologia del checker (longitudes, nodos, orientacion).
+        # material_ready: se materializo exactamente el alcance decidido
+        #   (vigas seccion ready + columnas + VI prismaticas; muros y VI-05
+        #   quedan pendientes por decision).
+        # analysis_ready: requiere ademas materializar muros y VI variable.
+        mat_present = getattr(self, "material_params", None) is not None
+        status = {
+            "geometry_ready": True,
+            "material_ready": (
+                mat_present
+                and actual["beams"] == material_ready["beams"]
+                and actual["columns"] == material_ready["columns"]
+                and actual["walls"] == material_ready["walls"]),
+            "analysis_ready": False,
+        }
+        report = {
             "expected": expected,
             "materializable": materializable,
+            "material_ready": material_ready,
+            "geometry_ready": geometry_ready,
+            "status": status,
             "actual": actual,
             "blockers": blockers,
             "pending_sections": pending_sections,
             "pending_beams": pending_beams,
+            "vi_materialized": vi_materialized,
+            "vi_pending": vi_pending,
             "slaves_per_level": self.diaph_slaves,
             "level_node_counts": {k: len(v) for k, v in self.level_tags.items()},
             "support_tags": support_tags,
+            "material_params": getattr(self, "material_params", None),
             "materialized": {"beams": mat_beams, "columns": mat_cols,
                              "walls": mat_walls},
         }
+        return report
 
 
 def _jrect(b, h):

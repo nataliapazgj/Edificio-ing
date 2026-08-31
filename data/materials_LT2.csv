@@ -1,0 +1,2 @@
+material_id,material_type,fc_MPa,E_kN_m2,nu,G_kN_m2,source_E,source_fc,source_nu,status
+CONC_G25,concrete_elastic,25,23500000,0.20,9791666.67,ETOG_Ec_4700sqrt_fc,SUPUESTO_MODELO_USUARIO,SUPUESTO_MODELO,ASSUMED_FOR_MODEL
