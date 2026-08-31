@@ -52,14 +52,19 @@ coordenadas y número exacto de tramos.
 **Resultado:** solo P010, sin M.H.A. ni elementos especiales. (Confirmado por cruce de planos/OCR
 y CSVs; recomendado cotejo visual final por lámina.)
 
-## 3) Muros M.H.A. e=20 en lámina 101 — `PENDIENTE_VERIFICACION_VISUAL`
-- Rótulos `M.H.A. e=20` detectados por OCR en 101: (4156,448), (4804,453), (4187,968), (4669,967);
-  bandas adicionales cerca de (5231,1022) que el OCR no pudo leer completamente.
-- `walls_LT2.csv` solo contiene espesores 0.60 / 0.30 / 0.25.
-- **NO se confirma muro faltante.** La detección proviene de OCR y **no se debe modificar
-  `walls_LT2.csv`** hasta verificar visualmente cada uno de estos rótulos (identidad, espesor real,
-  posición, nivel y continuidad).
-- Clasificación: `PENDIENTE_VERIFICACION_VISUAL`.
+## 3) Muros M.H.A. en lámina 101 — verificación visual humana (DESCARTADO)
+El OCR había detectado cuatro rótulos `M.H.A. e=20` en 101: (4156,448), (4804,453), (4187,968),
+(4669,967). **La verificación visual humana del plano 2024_22-101 confirmó que la detección fue un
+falso positivo.** En la planta 101 se observan únicamente:
+
+- **M.H.A. e=60** en los muros verticales del extremo A';
+- **M.H.A. e=30** en sus brazos horizontales;
+- **M.H.A. e=25** en los muros verticales del núcleo derecho;
+- **M.H.A. e=30** en el muro horizontal del núcleo derecho.
+
+Estos espesores son consistentes con los muros **M001–M008** actualmente registrados en
+`walls_LT2.csv`. **No deben agregarse muros nuevos por este hallazgo.**
+- Clasificación: `DESCARTADO_FALSO_POSITIVO_OCR`.
 
 ## 4) Vigas de fundación V.F. — `PENDIENTE_DECISION_MODELO`
 - Rótulos en láminas 301–305 y 400: **V.F. 20/120, 20/141, 20/150.5, 20/160, 20/180**.
@@ -87,6 +92,6 @@ y CSVs; recomendado cotejo visual final por lámina.)
 ## Próximos pasos sugeridos (fuera del alcance de esta auditoría)
 1. Revisión visual de láminas 102, 301, 302, 303, 305 y 400 para digitalizar tramos y endpoints
    de las V.I./+V.I.
-2. Revisión visual de `M.H.A. e=20` y `V.20/VAR` en lámina 101 antes de tocar `walls_LT2.csv`.
+2. Revisión visual de `V.20/VAR` en lámina 101 antes de tocar `walls_LT2.csv`.
 3. Decisión de modelo sobre vigas/fundaciones en B1 (apoyos empotrados vs. V.F. explícitas).
 4. Incorporar la E.T.O.G. al repositorio si procede para validar M.N.E.H. y criterios.

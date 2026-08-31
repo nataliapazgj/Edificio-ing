@@ -3,3 +3,7 @@ P70x70,column,0.70,0.70,,Pilar 70x70 indicado en planta
 V60x80,beam,0.60,0.80,,Viga 60x80 visible en planta tipo LT2
 V40x80,beam,0.40,0.80,,Viga 40x80 visible en planta tipo LT2
 V30x80,beam,0.30,0.80,,Viga 30x80 visible en planta tipo LT2
+VI15x70,beam,0.15,0.70,,Viga de Ingenieria 15x70 ROOF 2a ETAPA; family=VI;analysis_status=ready
+VI15x68,beam,0.15,0.68,,Viga de Ingenieria 15x68 ROOF 2a ETAPA; family=VI;analysis_status=ready
+VI15x76,beam,0.15,0.76,,Viga de Ingenieria 15x76 ROOF 2a ETAPA; family=VI;analysis_status=ready
+VI15xVAR,beam,,,,"Viga de Ingenieria 15xVAR ROOF 2a ETAPA; family=VI;analysis_status=PENDING_VARIABLE_SECTION;altura variable detalle 400 sec.1 y 3"

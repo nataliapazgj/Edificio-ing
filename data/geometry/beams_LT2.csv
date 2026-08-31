@@ -229,3 +229,10 @@ ROOF_BD_V60_15,21.25,0.0,21.25,8.9,ROOF,V60x80,LT2,2024_22-102-Model.pdf,
 ROOF_BD_V60_16,21.25,8.9,21.25,16.15,ROOF,V60x80,LT2,2024_22-102-Model.pdf,
 ROOF_BD_V60_17,26.25,0.0,26.25,8.9,ROOF,V60x80,LT2,2024_22-102-Model.pdf,
 ROOF_BD_V60_18,26.25,8.9,26.25,16.15,ROOF,V60x80,LT2,2024_22-102-Model.pdf,
+ROOF_VI_01,0.998,7.92,7.646,7.92,ROOF,VI15x70,VI,2024_22-102-Model.pdf,family=VI;stage=2;audit_id=VI-01;borde_N_O_hueco
+ROOF_VI_02,8.246,7.92,16.546,7.92,ROOF,VI15x70,VI,2024_22-102-Model.pdf,family=VI;stage=2;audit_id=VI-02;borde_N_E_hueco
+ROOF_VI_03,0.998,2.90,7.596,2.90,ROOF,VI15x68,VI,2024_22-102-Model.pdf,family=VI;stage=2;audit_id=VI-03;borde_S_O_hueco;centroide_ajustado=true;ajuste_m=0.049;detalle=extremo_oeste_ajustado_de_cara_interior_1.047_a_eje_miembro_0.998_para_conectividad_nodo_comun_con_VI-05
+ROOF_VI_04,8.296,2.90,16.546,2.90,ROOF,VI15x68,VI,2024_22-102-Model.pdf,family=VI;stage=2;audit_id=VI-04;borde_S_E_hueco;centroide_ajustado=true;ajuste_m=0.051;detalle=extremo_este_ajustado_de_cara_interior_16.495_a_eje_miembro_16.546_para_conectividad_nodo_comun_con_VI-06
+ROOF_VI_05,0.998,2.90,0.998,7.92,ROOF,VI15xVAR,VI,2024_22-102-Model.pdf,family=VI;stage=2;audit_id=VI-05;borde_O_hueco;analysis_status=PENDING_VARIABLE_SECTION
+ROOF_VI_06,16.546,2.90,16.546,7.92,ROOF,VI15x76,VI,2024_22-102-Model.pdf,family=VI;stage=2;audit_id=VI-06;borde_E_hueco
+ROOF_VI_07,18.545,7.92,20.794,7.92,ROOF,VI15x76,VI,2024_22-102-Model.pdf,family=VI;stage=2;audit_id=VI-07;borde_N_2do_hueco_este

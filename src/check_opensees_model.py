@@ -55,13 +55,14 @@ def main():
               "diaphragms"):
         check(f"{k}", act[k] == exp[k],
               f"(got {act[k]}, expected {exp[k]})")
+    matz = report["materializable"]
     for k in ("beams", "columns", "walls"):
-        check(f"{k}", act[k] == exp[k],
-              f"(got {act[k]}, expected {exp[k]})")
-    tot_exp = exp["beams"] + exp["columns"] + exp["walls"]
+        check(f"{k}", act[k] == matz[k],
+              f"(got {act[k]}, materializable {matz[k]}, csv {exp[k]})")
+    tot_exp = matz["beams"] + matz["columns"] + matz["walls"]
     tot_act = act["beams"] + act["columns"] + act["walls"]
     check("total_elements", tot_act == tot_exp,
-          f"(got {tot_act}, expected {tot_exp})")
+          f"(got {tot_act}, materializable {tot_exp})")
 
     print("[Master nodes]")
     masters_csv = pd.read_csv(GEOM / "master_nodes_LT2.csv")
@@ -155,16 +156,24 @@ def main():
     print("[Material / datos faltantes]")
     for b in report["blockers"]:
         print(f"  [BLOCK] {b}")
+    pending = report.get("pending_beams", [])
+    if pending:
+        print(f"  [PEND] Beams intencionalmente no materializados "
+              f"(seccion variable): {pending}")
+    psec = report.get("pending_sections", [])
+    if psec:
+        print(f"  [PEND] Secciones excluidas del modelo: {psec}")
 
     print("[Conteos por nivel]")
     for k, v in report["level_node_counts"].items():
         print(f"  nivel {k}: {v} nodos estructurales")
 
     print("[Resumen]")
-    print(f"  vigas materializadas      : {act['beams']}/{exp['beams']}")
-    print(f"  columnas materializadas   : {act['columns']}/{exp['columns']}")
-    print(f"  muros materializados      : {act['walls']}/{exp['walls']}")
-    print(f"  nodos max tag             : {max(ops.getNodeTags())}")
+    print(f"  vigas geometricas (CSV) : {exp['beams']}")
+    print(f"  vigas materializadas    : {act['beams']}/{matz['beams']}")
+    print(f"  columnas materializadas : {act['columns']}/{matz['columns']}")
+    print(f"  muros materializados    : {act['walls']}/{matz['walls']}")
+    print(f"  nodos max tag           : {max(ops.getNodeTags())}")
 
     if not ok:
         print(f"{RED}FALLO: OpenSees no reproduce la fuente de datos{END}")

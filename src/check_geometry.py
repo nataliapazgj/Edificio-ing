@@ -137,6 +137,81 @@ def main():
         print(columns["section"].value_counts().to_string())
     print()
 
+    # --------------------------------------------------- V.I. ROOF
+    print("[V.I. ROOF]")
+    vi_prefix = "ROOF_VI_"
+    vi_beams = beams[beams["beam_id"].astype(str).str.startswith(vi_prefix)]
+    conv_beams = beams[~beams["beam_id"].astype(str).str.startswith(vi_prefix)]
+    expected_vi_ids = [f"ROOF_VI_{i:02d}" for i in range(1, 8)]
+    expected_absent = [f"ROOF_VI_{i:02d}" for i in (8, 9, 10)]
+    present_vi_ids = sorted(vi_beams["beam_id"].astype(str).tolist())
+
+    if present_vi_ids == expected_vi_ids:
+        print(f"  OK - VI-01..07 present ({len(vi_beams)} beams).")
+    else:
+        missing_vi = set(expected_vi_ids) - set(present_vi_ids)
+        extra_vi = set(present_vi_ids) - set(expected_vi_ids)
+        if missing_vi:
+            report(f"VI beams missing: {sorted(missing_vi)}")
+        if extra_vi:
+            report(f"Unexpected VI beams: {sorted(extra_vi)}")
+
+    found_absent = [bid for bid in expected_absent
+                    if bid in beams["beam_id"].astype(str).values]
+    if found_absent:
+        report(f"VI-08..10 should be absent but found: {found_absent}")
+    else:
+        print("  OK - VI-08..10 absent from model.")
+
+    roof_conv = beams[(beams["level"] == "ROOF")
+                      & (~beams["beam_id"].astype(str).str.startswith(vi_prefix))]
+    replaced = []
+    for _, rc in roof_conv.iterrows():
+        for _, vb in vi_beams.iterrows():
+            if (abs(cfloat(rc["x1_m"]) - cfloat(vb["x1_m"])) < 1e-6
+                    and abs(cfloat(rc["y1_m"]) - cfloat(vb["y1_m"])) < 1e-6
+                    and abs(cfloat(rc["x2_m"]) - cfloat(vb["x2_m"])) < 1e-6
+                    and abs(cfloat(rc["y2_m"]) - cfloat(vb["y2_m"])) < 1e-6):
+                replaced.append(f"{rc['beam_id']} == {vb['beam_id']}")
+    if replaced:
+        report(f"VI replaced conventional beams: {replaced}")
+    else:
+        print("  OK - No VI beam replaced a conventional beam.")
+
+    section_notes = {str(r["section_id"]): str(r.get("notes", ""))
+                     for _, r in sections.iterrows()}
+    vi_pending = []
+    vi_ready = []
+    for _, vb in vi_beams.iterrows():
+        sid = str(vb["section"])
+        notes = section_notes.get(sid, "")
+        if "analysis_status=PENDING_VARIABLE_SECTION" in notes:
+            vi_pending.append(str(vb["beam_id"]))
+        else:
+            vi_ready.append(str(vb["beam_id"]))
+    if vi_pending:
+        print(f"  [PEND] VI beams with PENDING_VARIABLE_SECTION: {vi_pending}")
+    print(f"  OK - VI analysis_ready beams: {vi_ready}")
+
+    roof_total = len(beams[beams["level"] == "ROOF"])
+    lt2_total = len(beams)
+    expected_roof = 53
+    expected_lt2 = 237
+    if roof_total != expected_roof:
+        report(f"ROOF beams: {roof_total} (expected {expected_roof})")
+    else:
+        print(f"  OK - ROOF geometric beams: {roof_total}")
+    if lt2_total != expected_lt2:
+        report(f"LT2 geometric beams: {lt2_total} (expected {expected_lt2})")
+    else:
+        print(f"  OK - LT2 geometric beams: {lt2_total}")
+
+    n_analysis_ready = lt2_total - len(vi_pending)
+    print(f"  Geometric beams (all) : {lt2_total}")
+    print(f"  Analysis-ready beams  : {n_analysis_ready} "
+          f"({len(vi_pending)} pending variable section)")
+    print()
+
     # --------------------------------------------------- coordenadas
     print("[NaN coordinates]")
     nan_list = []

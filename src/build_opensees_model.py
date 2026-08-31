@@ -245,11 +245,24 @@ class ModelBuilder:
             return TRANS_B_Y
         return None
 
+    @staticmethod
+    def _section_analysis_status(section_row):
+        notes = str(section_row.get("notes", ""))
+        if "analysis_status=PENDING_VARIABLE_SECTION" in notes:
+            return "PENDING_VARIABLE_SECTION"
+        return "ready"
+
     def _materialize(self, materials, e, nu):
         self.n_materialized = {"beams": 0, "columns": 0, "walls": 0}
         g = e / (2.0 * (1.0 + nu))
         section_tag = {}
+        self._pending_sections = []
+        self._pending_beams = []
         for _, s in self.sections.iterrows():
+            status = self._section_analysis_status(s)
+            if status != "ready":
+                self._pending_sections.append(str(s["section_id"]))
+                continue
             b = float(s["b_m"])
             h = float(s["h_m"])
             a, iy, iz = rect_props(b, h)
@@ -258,6 +271,9 @@ class ModelBuilder:
             ops.section("Elastic", tag, e, a, iz, iy, g, j)
             section_tag[str(s["section_id"])] = tag
         for i, e_ in enumerate(self.elems["beams"]):
+            if e_["section"] in self._pending_sections:
+                self._pending_beams.append(e_["id"])
+                continue
             transf = self._orient(e_)
             if transf is None:
                 continue
@@ -270,6 +286,8 @@ class ModelBuilder:
             self.n_materialized["columns"] += 1
 
     def _report(self, support_tags, mat_beams, mat_cols, mat_walls, blockers):
+        pending_sections = getattr(self, "_pending_sections", [])
+        pending_beams = getattr(self, "_pending_beams", [])
         expected = {
             "beams": len(self.elems["beams"]),
             "columns": len(self.elems["columns"]),
@@ -279,6 +297,11 @@ class ModelBuilder:
             "diaphragms": len(self.diaphs),
             "structural_nodes": len(self.structural_tags),
             "total_nodes": len(self.structural_tags) + len(self.masters),
+        }
+        materializable = {
+            "beams": expected["beams"] - len(pending_beams),
+            "columns": expected["columns"],
+            "walls": expected["walls"],
         }
         actual = {
             "beams": mat_beams,
@@ -292,8 +315,11 @@ class ModelBuilder:
         }
         return {
             "expected": expected,
+            "materializable": materializable,
             "actual": actual,
             "blockers": blockers,
+            "pending_sections": pending_sections,
+            "pending_beams": pending_beams,
             "slaves_per_level": self.diaph_slaves,
             "level_node_counts": {k: len(v) for k, v in self.level_tags.items()},
             "support_tags": support_tags,

@@ -383,21 +383,44 @@ def main():
                     fontsize=7, color="tab:orange")
 
     # Vigas: prisma en el nivel indicado; sin seccion se dibujan como linea
+    vi_color = "magenta"
+    conv_color = "tab:green"
+    legend_handles = []
     for _, b in beams.iterrows():
         lv = str(b["level"])
         if lv not in z_level:
             continue
         x1, y1, x2, y2 = (float(b[c]) for c in ("x1_m", "y1_m", "x2_m", "y2_m"))
         z = z_level[lv]
+        bid = str(b["beam_id"])
+        is_vi = bid.startswith("ROOF_VI_")
+        color = vi_color if is_vi else conv_color
         dims = section_dims(section_geom, str(b["section"]))
         if dims is not None:
             bw, bh = dims
             draw_strip_box(ax, x1, y1, x2, y2, bw, z, z + bh,
-                           color="tab:green", lw=2.0)
+                           color=color, lw=2.0)
         else:
-            ax.plot([x1, x2], [y1, y2], [z, z], color="tab:green", lw=3.0)
-        ax.text((x1 + x2) / 2, (y1 + y2) / 2, z, str(b["beam_id"]),
-                fontsize=7, color="tab:green")
+            ax.plot([x1, x2], [y1, y2], [z, z], color=color, lw=3.0)
+        ax.text((x1 + x2) / 2, (y1 + y2) / 2, z, bid,
+                fontsize=7, color=color)
+
+    import matplotlib.lines as mlines
+    legend_handles.append(mlines.Line2D([], [], color=conv_color, lw=2,
+                                        label="Vigas convencionales"))
+    legend_handles.append(mlines.Line2D([], [], color=vi_color, lw=2,
+                                        label="V.I. (2a ETAPA)"))
+    legend_handles.append(mlines.Line2D([], [], color="tab:blue", lw=2,
+                                        label="Columnas"))
+    legend_handles.append(mlines.Line2D([], [], color="tab:orange", lw=2,
+                                        label="M.H.A. (muros)"))
+    if flag_supports and supports is not None:
+        legend_handles.append(mlines.Line2D([], [], color="k", marker="^",
+                                            ls="", label="Apoyos (B1)"))
+    if flag_masters and masters is not None:
+        legend_handles.append(mlines.Line2D([], [], color="tab:purple",
+                                            marker="D", ls="", label="Masters"))
+    ax.legend(handles=legend_handles, loc="upper left", fontsize=8)
 
     # Niveles (piezas de planta en el contorno del edificio)
     for _, lv in levels.iterrows():
