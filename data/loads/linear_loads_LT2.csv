@@ -1,0 +1,2 @@
+lineal_load_id,level,source_plan,type,value_kg_m,value_kN_m,status,note
+LL_ROOF_BORDE,ROOF,2024_22-700-Model,PM_ADIC_lineal,1500,14.715,PENDING_GEO_APLICACION,CARGAS_DE_DISENO_carga_lineal_NO_mezclar_con_qG_superficial
