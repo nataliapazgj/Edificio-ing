@@ -24,9 +24,10 @@ sobre el recinto continuo de losa x∈[0.4, 31.25], y∈[0, 16.15]:
   - Bloque izquierdo x[0.4,11.25], filas y{0,4.265,8.9,11.885,16.15}, columnas x{0.4,3.75,7.5,11.25} → 12 paños.
   - Bloque derecho x[11.25,31.25], filas y{0,8.9,16.15}, columnas x{11.25,16.25,21.25,26.25,31.25} → 8 paños.
   - Total **20 paños**, reutilizados idénticos en L1..L4 (plantilla `TYP`).
-- **ROOF (plan 102):** mismos bloques base, **restando** los huecos de escalera documentados:
+- **ROOF (plan 102):** mismos bloques base; los huecos de escalera confirmados se restan del
+  área y se almacenan en la columna `holes` (rectángulo recortado a cada paño):
   hueco principal x[0.998,16.546] y[2.90,7.92] y 2º hueco este x[18.52,21.295] y[2.92,7.92].
-  Los paños intersectados se marcan `PENDING_VISUAL_CONFIRMATION` (fracción restante en notas).
+  Las V.I. son miembros **adicionales de borde de hueco** (no subdividen losa sólida).
 
 ## Validación visual (plan 101, L1-L4)
 
@@ -50,6 +51,40 @@ Se revisaron crops de alta resolución de `review_crops/validation/` contra el p
 - El resto de paños de la planta tipo se originaban solo por descomposición automática de
   grilla → ya **NO** se etiquetan `CONFIRMADO`; quedan `PENDING_VISUAL_CONFIRMATION`.
 
+## Validación visual (plan 102, ROOF)
+
+Se cruzaron los crops de `review_crops/validation/` (ROOF_*_d300) y los datos digitalizados de
+`data/geometry/beams_LT2.csv` (vigas VI-01…VI-07) contra el plano 102:
+
+- **Hueco principal de escalera CONFIRMADO:** x[0.998,16.546] y[2.90,7.92], perímetro
+  delimitado en sus 4 lados por vigas invertidas: N = VI-01+VI-02 (y=7.92, 15/70), S = VI-03+VI-04
+  (y=2.90, 15/68), O = VI-05 (x=0.998, 15/VAR), E = VI-06 (x=16.546, 15/76). Auditoría §8.0.
+- **2º hueco este CONFIRMADO:** x[18.52,21.295] y[2.92,7.92]; borde N = VI-07 (y=7.92, 15/76,
+  x 18.545..20.794) + rectángulo vectorial del plano 102. Auditoría §8.5 (NO es continuación del
+  hueco principal).
+- **Vigas VI = ADICIONALES de borde de hueco:** ninguna coincide con los ejes de grilla
+  (y∈{0,4.265,8.9}, x∈{11.25,16.25,21.25}) → no subdividen losa sólida; delimitan únicamente los
+  vanos vacíos. Los paños quedan como losa real con hueco interior (`holes`), no SU divididos en
+  dos paños.
+- **Paños intersectados** → `CONFIRMED_SLAB` con `holes` (rectángulo de hueco recortado) y
+  `hole_status=CONFIRMED`: `LB_c0_r0`, `LB_c0_r1`, `LB_c1_r0`, `LB_c1_r1`, `LB_c2_r0`, `LB_c2_r1`,
+  `RB_c0_r0`, `RB_c1_r0` (2 huecos), `RB_c2_r0`.
+- **Resto de paños ROOF** (sin hueco) → `CONFIRMED_SLAB` (losa real del plan 102).
+- **Espesor/e de ROOF NO leído** en el plano 102 (símbolo circular no determinable con evidencia
+  visual disponible) → `thickness_m` y `qG` permanecen **None/PENDING** en ROOF. NO se asume e=15.
+
+**Relación paños ↔ V.I.:**
+
+| panel (ROOF) | V.I. que lo cruzan | lectura |
+|---|---|---|
+| LB_c0_r0 | VI-03, VI-05 | borde S y O del hueco principal |
+| LB_c0_r1 | VI-01 | borde N del hueco principal |
+| LB_c1_r0 | VI-03 | borde S del hueco principal |
+| LB_c1_r1 | VI-01 | borde N del hueco principal |
+| RB_c0_r0 | VI-02, VI-04 | borde N/S del hueco principal |
+| RB_c1_r0 | VI-02, VI-04, VI-06, VI-07 | N/S principal + borde E principal + borde N 2º hueco |
+| RB_c2_r0 | — | borde E estrecho del 2º hueco este |
+
 ## Resultado
 
 Área neta = área exterior del paño − huecos confirmados. Por nivel:
@@ -60,11 +95,12 @@ Se revisaron crops de alta resolución de `review_crops/validation/` contra el p
 | L2 | 20 | 488.803 | 3 | 17 | 0 |
 | L3 | 20 | 488.803 | 3 | 17 | 0 |
 | L4 | 20 | 488.803 | 3 | 17 | 0 |
-| ROOF | 20 | 406.302 | 0 | 9 (+20 qG pend.) | 0 |
+| ROOF | 20 | 406.302 | 20 | 0 | 0 |
 
 - L1-L4 `CONFIRMED_SLAB`: `LB_c0_r0`, `LB_c0_r3`, `RB_c3_r0`.
 - L1-L4 `RB_c3_r0`: `holes`=núcleo confirmado, `hole_status`=`CONFIRMED;PENDING_GEOMETRY_CONFIRMATION`.
-- ROOF: sin cambios (su validación de plan 102 es bloque/estado aparte).
+- ROOF: **20 paños CONFIRMED_SLAB** (losa real); 9 paños con `holes` de escalera confirmados;
+  espesor/e y qG siguen pendientes (NO seteado e=15).
 
 ## Archivos
 
@@ -88,7 +124,8 @@ Se revisaron crops de alta resolución de `review_crops/validation/` contra el p
 1. `PENDING_GEOMETRY_CONFIRMATION` en `RB_c3_r0`: confirmar y digitalizar la abertura
    rectangular alargada adyacente al núcleo (plan 101) para restar su área.
 2. Confirmar visualmente el resto de paños de planta tipo (hoy `PENDING_VISUAL_CONFIRMATION`).
-3. Validación visual de ROOF (plan 102): huecos de escalera y espesor/e para completar qG.
+3. **espesor/e de ROOF** para completar `qG` (símbolo circular de losa del plan 102 aún no leído;
+   el 2º hueco este y VI-07b borde sur quedan anotados en la auditoría de V.I.).
 4. Subdivisión de paños por vigas parciales (V30 en filas 4.265/11.885 cubren x 1.9→7.5) —
    verificado si es necesaria refinación.
 5. Bloques posteriores: áreas tributarias y transferencia de q_G a vigas.

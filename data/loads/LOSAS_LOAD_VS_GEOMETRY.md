@@ -44,7 +44,10 @@ Mapeo plano → nivel (corregido; convención estructural LT2):
     (hueco confirmado M005-M008 + abertura alargada adyacente pendiente). Los tres paños pasan
     a `CONFIRMED_SLAB` en `slab_panels_LT2.csv` (ver `reports/paños_losas_bloque2a.md`).
 - **Plano 102** (`PLANTA CIELO PISO 4°`) corresponde al **ROOF**.
-  - Espesor por confirmar → `PENDING_VISUAL_CONFIRMATION`. No asumir 15 cm.
+  - Geometría **validada** (plan 102 + auditoría V.I.): los 20 paños son losa real; los huecos de
+    escalera principal x[0.998,16.546] y[2.90,7.92] y 2º este x[18.52,21.295] y[2.92,7.92] están
+    **CONFIRMED** y restados del área (columna `holes`). Las V.I. son de borde de hueco (adicionales).
+  - Espesor `e` **NO leído** en plan 102 → `PENDING_VISUAL_CONFIRMATION`. No asumir 15 cm.
   - PM_ADIC superficial = 200 kg/m² confirmado, pero `q_G` no definitivo sin `e`.
 - No existe nivel de carga adicional entre L4 y ROOF.
 - **B1 / fundaciones (plan 200):** fuera de los diafragmas del modelo (B1 usa apoyos fijos);
@@ -58,7 +61,7 @@ Mapeo plano → nivel (corregido; convención estructural LT2):
 | L2 | 0.15 | 375 | 260 | 635 | 6.22935 | CONFIRMADO_e15 | 101 + 700 |
 | L3 | 0.15 | 375 | 260 | 635 | 6.22935 | CONFIRMADO_e15 | 101 + 700 |
 | L4 | 0.15 | 375 | 260 | 635 | 6.22935 | CONFIRMADO_e15 | 101 + 700 |
-| ROOF | pendiente | — | 200 (sup.) | — | — | PENDING_VISUAL_CONFIRMATION | 102 + 700 |
+| ROOF | pendiente | — | 200 (sup.) | — | — | PENDING_VISUAL_CONFIRMATION (e) / geometría CONFIRMED | 102 + 700 |
 
 ## Pendiente visual (no bloqueado, requiere lectura de símbolos)
 

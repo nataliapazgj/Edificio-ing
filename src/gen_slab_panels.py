@@ -104,6 +104,15 @@ def rect_overlap_frac(ax0, ay0, ax1, ay1, bx0, by0, bx1, by1):
     return overlap
 
 
+def rect_intersection(ax0, ay0, ax1, ay1, bx0, by0, bx1, by1):
+    """Interseca dos rectangulos; devuelve (x0,y0,x1,y1) o None."""
+    ox0, ox1 = max(ax0, bx0), min(ax1, bx1)
+    oy0, oy1 = max(ay0, by0), min(ay1, by1)
+    if ox1 <= ox0 or oy1 <= oy0:
+        return None
+    return (ox0, oy0, ox1, oy1)
+
+
 def subtract_hole_frac(cx0, cy0, cx1, cy1, holes):
     """Fraccion (0..1) del panel cubierta por huecos y centroide aproximado."""
     tot = area_rect(cx0, cy0, cx1, cy1)
@@ -166,37 +175,45 @@ def build_rows():
             })
 
     # ---- ROOF ----
-    holes = [(0.998, 2.90, 16.546, 7.92),
-             (18.52, 2.92, 21.295, 7.92)]
+    # Huecos de escalera CONFIRMADOS (plano 102 + auditoría §8.0/§8.5):
+    #  - principal: x[0.998,16.546] y[2.90,7.92] (perímetro VI-15/70 N, VI-15/68 S,
+    #    VI-15/VAR O, VI-15/76 E)
+    #  - 2º hueco este: x[18.52,21.295] y[2.92,7.92] (borde N VI-07, rect 102)
+    # Las V.I. son miembros ADICIONALES de borde de hueco; NO subdividen losa.
+    roof_holes = [
+        ("principal", "CONFIRMED", (0.998, 2.90, 16.546, 7.92)),
+        ("2do_este", "CONFIRMED", (18.52, 2.92, 21.295, 7.92)),
+    ]
     roof_panels = cells_leftblock() + cells_rightblock()
     for cid, x0, y0, x1, y1 in roof_panels:
-        frac = subtract_hole_frac(x0, y0, x1, y1, holes)
         p = f"ROOF_P_{cid}"
-        presence = "CONFIRMADO" if frac < 1e-9 else (
-            "PARCIAL_ABERTURA" if 0 < frac < 0.999 else "ABERTURA")
-        if frac >= 0.999:
-            # panel totalmente cubierto por hueco -> no hay losa
-            status = "SIN_LOSA_HUECO"
-            notes = "paño totalmente dentro de hueco de escalera documentado (plano 102)"
-            area_eff = 0.0
-        elif frac > 1e-9:
-            status = "PENDING_VISUAL_CONFIRMATION"
-            notes = (f"paño intersectado por hueco de escalera documentado "
-                     f"(fracción restante={1-frac:.3f}); espesor ROOF pendiente")
-            area_eff = round(area_rect(x0, y0, x1, y1) * (1 - frac), 6)
+        holes_clipped = []
+        hole_statuses = []
+        for hid, hstatus, hrect in roof_holes:
+            clip = rect_intersection(x0, y0, x1, y1, *hrect)
+            if clip is None:
+                continue
+            holes_clipped.append(clip)
+            hole_statuses.append(f"{hid}={hstatus}")
+        exterior = area_rect(x0, y0, x1, y1)
+        net_area = exterior - sum(area_rect(*h) for h in holes_clipped)
+        # espesor/e ROOF no leído en plan 102 -> se mantiene PENDING en slabs
+        if not holes_clipped:
+            status = "CONFIRMED_SLAB"
+            notes = "paño ROOF losa real confirmada (plano 102); espesor/e pendiente"
         else:
-            status = "CONFIRMADO"
-            notes = "paño base ROOF; espesor/e pendiente de plan 102"
-            area_eff = round(area_rect(x0, y0, x1, y1), 6)
+            status = "CONFIRMED_SLAB"
+            notes = ("paño ROOF losa real con hueco de escalera confirmado en su "
+                     "interior (plano 102 + V.I. de borde); espesor/e pendiente")
         rows.append({
             "panel_id": p,
             "level": "ROOF",
             "source_plan": "2024_22-102-Model",
             "slab_id": "S_ROOF_TYP",
             "polygon": poly_str(x0, y0, x1, y1),
-            "area_m2": area_eff,
-            "holes": "",
-            "hole_status": "",
+            "area_m2": round(max(net_area, 0.0), 6),
+            "holes": hole_rects_str(holes_clipped),
+            "hole_status": ";".join(hole_statuses),
             "thickness_m": None,
             "qG_kN_m2": None,
             "status": status,
