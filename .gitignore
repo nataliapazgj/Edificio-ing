@@ -23,3 +23,8 @@ unity/Logs/
 unity/Obj/
 unity/Build/
 unity/Builds/
+
+# Revision crops (auxiliar, no versionar)
+review_crops/loads_700/
+review_crops/slabs/
+review_crops/validation/
