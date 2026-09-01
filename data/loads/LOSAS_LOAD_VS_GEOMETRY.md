@@ -1,18 +1,19 @@
 # Losas LT2 — definiciones de carga y estado de geometría
 
-**Fecha:** 2026-09 (bloque de implementación de cargas gravitacionales q_G).
+**Fecha:** 2026-09 (cargas q_G → bloque 2A geometría de paños).
 
 ## Separación estructural
 
 Se separa explícitamente:
 
 - **`slab_load_definition`** → `data/loads/slabs_LT2.csv`: parámetros de carga de cada losa
-  (espesor, densidad, PP, terminaciones, q_G). Sin polígonos todavía.
-- **`slab_geometry`** → PENDIENTE de un próximo bloque: contorno, paños, huecos y zonas sin
-  losa por nivel, a partir de la lectura manual de los símbolos circulares de los planos
-  (101 / 201 para L1-L4, 102 / 202 para ROOF).
+  (espesor, densidad, PP, terminaciones, q_G).
+- **`slab_geometry`** → `data/loads/slab_panels_LT2.csv` (bloque 2A, primera versión): paños
+  de losa derivados de la grilla de vigas digitalizada (compatible con el modelo), reutilizando
+  la planta tipo L1-L4 y restando los huecos de escalera documentados en ROOF. El cálculo de
+  áreas tributarias y la transferencia de q_G a vigas es un **bloque posterior**.
 
-La geometría se incorporará en el siguiente bloque **sin rehacer** la definición de cargas.
+La geometría se incorporó en el bloque 2A **sin rehacer** la definición de cargas.
 
 ## Fuentes de carga (plano 700)
 
@@ -38,6 +39,10 @@ Mapeo plano → nivel (corregido; convención estructural LT2):
   - `e = 15 cm = 0.15 m` confirmado (anotación explícita "LOSA e=15").
   - `PP_LOSA = 0.15 × 2500 = 375 kg/m²`
   - `q_G = 375 + 260 = 635 kg/m² = 6.22935 kN/m²`.
+  - Validación visual (crops `review_crops/validation/`): `LB_c0_r0` = símbolo **0101/15**,
+    `LB_c0_r3` = símbolo **0114/15**; `RB_c3_r0` = losa 15 cm con abertura de núcleo
+    (hueco confirmado M005-M008 + abertura alargada adyacente pendiente). Los tres paños pasan
+    a `CONFIRMED_SLAB` en `slab_panels_LT2.csv` (ver `reports/paños_losas_bloque2a.md`).
 - **Plano 102** (`PLANTA CIELO PISO 4°`) corresponde al **ROOF**.
   - Espesor por confirmar → `PENDING_VISUAL_CONFIRMATION`. No asumir 15 cm.
   - PM_ADIC superficial = 200 kg/m² confirmado, pero `q_G` no definitivo sin `e`.
@@ -58,5 +63,6 @@ Mapeo plano → nivel (corregido; convención estructural LT2):
 ## Pendiente visual (no bloqueado, requiere lectura de símbolos)
 
 1. Leer espesor real de **ROOF** en plan 102 / armadura 202.
-2. Confirmar paños / "LOSA 5/CUADRO (S.1.C.)" en plan 101.
-3. Zonificar SC por hatch (separada, fuera de q_G).
+2. Confirmar abertura alargada adyacente al núcleo en `RB_c3_r0` (plan 101) — `PENDING_GEOMETRY_CONFIRMATION`.
+3. Confirmar visualmente el resto de paños de planta tipo (hoy `PENDING_VISUAL_CONFIRMATION`).
+4. Zonificar SC por hatch (separada, fuera de q_G).
