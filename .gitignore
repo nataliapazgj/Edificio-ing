@@ -23,6 +23,13 @@ unity/Logs/
 unity/Obj/
 unity/Build/
 unity/Builds/
+unity/UserSettings/
+unity/*.csproj
+unity/*.sln
+unity/*.user
+unity/.vsconfig
+unity/.vs/
+unity/Assets/*.csproj
 
 # Revision crops (auxiliar, no versionar)
 review_crops/loads_700/
