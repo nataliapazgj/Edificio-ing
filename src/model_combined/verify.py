@@ -90,7 +90,7 @@ class CombinedChecks:
         dup_elems = {k: v for k, v in pairs.items() if len(v) > 1}
         self._set("elementos_duplicados", len(dup_elems) == 0,
                   f"{len(dup_elems)} pares de nodos con >1 elemento "
-                  "(hereda de LT1; no bloquea)")
+                  "(no bloquea: heredado de LT1)")
 
         # referencias a nodos inexistentes
         nset = set(nts)

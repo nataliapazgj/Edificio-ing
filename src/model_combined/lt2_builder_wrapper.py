@@ -34,6 +34,9 @@ class LT2Model:
         self.master_tags = None
         self.master_by_level = {}
         self.diaph_skipped = False
+        self.diaph_exclude = set()
+        self.wall_stats = None
+        self.connect_stats = None
 
     def build(self, skip_diaphragms=True):
         b = self.builder

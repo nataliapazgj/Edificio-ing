@@ -1,26 +1,28 @@
 metric,value
-n_nodes,452
-n_elements,518
+n_nodes,442
+n_elements,602
 n_interface_shared,12
-lt2_beams,236
+lt2_beams,230
 lt2_cols,50
+lt2_walls,80
+lt2_connectors,10
 lt1_columns,39
 lt1_beams,175
 lt1_walls,18
-rc,-3
+rc,0
 lt2_total_load_kN,11541.291565212
 lt1_total_load_kN,25394.441750117447
 combined_total_load_kN,36935.733315329446
-sum_rz_kN,nan
-equil_rel_err,nan
-uz_max_m,0.0
-uz_node,
+sum_rz_kN,36935.73331579239
+equil_rel_err,1.2533861211454862e-11
+uz_max_m,-0.1449148185966489
+uz_node,1000078
 n_support,37
 check_nodos_duplicados_geometricos,OK|0 nodos en misma coord
-check_tags_nodo_duplicados,"OK|452 nodos, 0 tags dup"
-check_tags_elemento_duplicados,"OK|518 elementos, 0 tags dup"
+check_tags_nodo_duplicados,"OK|442 nodos, 0 tags dup"
+check_tags_elemento_duplicados,"OK|602 elementos, 0 tags dup"
 check_longitud_cero,OK|0 elementos con L=0
-check_elementos_duplicados,FALLO|2 pares de nodos con >1 elemento (hereda de LT1; no bloquea)
+check_elementos_duplicados,FALLO|17 pares de nodos con >1 elemento (hereda de LT1; no bloquea)
 check_ref_nodos_inexistentes,OK|0 refs malas
 check_master_existente_1002,OK|master 1002 existe
 check_master_existente_1003,OK|master 1003 existe

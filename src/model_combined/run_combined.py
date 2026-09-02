@@ -31,12 +31,16 @@ from .lt1_builder_combined import build_ops_model_combined
 from .diaphragms_combined import build_diaphragms
 from .lt1_gravity import build_tributary_lt1, apply_gravity_lt1
 from .verify import CombinedChecks
+from . import lt2_walls
+from . import lt2_connect
 import gravity_loads as gl  # noqa: E402
 
 
 def build_lt2():
     m = LT2Model()
     m.build(skip_diaphragms=True)   # diafragmas los hara el orquestador
+    m.wall_stats = lt2_walls.materialize_lt2_walls(m)
+    m.connect_stats = lt2_connect.connect_floating_beams(m)
     return m
 
 
@@ -79,8 +83,12 @@ def collect_results(lt2, lt1_summary, lt2_p, lt2_total, lt1_nodal, lt1_totals):
     # contadores por torre (LT1 del summary; LT2 derivado de tags)
     lt2_beams = len([t for t in ops.getEleTags() if 2001 <= t < 3001])
     lt2_cols = len([t for t in ops.getEleTags() if 3001 <= t < 4001])
+    lt2_walls = len([t for t in ops.getEleTags() if 4001 <= t < 9000])
+    lt2_conn = len([t for t in ops.getEleTags() if 9001 <= t < 10000])
     res["lt2_beams"] = lt2_beams
     res["lt2_cols"] = lt2_cols
+    res["lt2_walls"] = lt2_walls
+    res["lt2_connectors"] = lt2_conn
     res["lt1_columns"] = len(lt1_summary["col_elements"])
     res["lt1_beams"] = len(lt1_summary["beam_elements"])
     res["lt1_walls"] = len(lt1_summary["wall_elements"])
@@ -189,6 +197,8 @@ def main():
         "n_interface_shared": len(C.INTERFACE_MAP),
         "lt2_beams": len([t for t in ops.getEleTags() if 2001 <= t < 3001]),
         "lt2_cols": len([t for t in ops.getEleTags() if 3001 <= t < 4001]),
+        "lt2_walls": len([t for t in ops.getEleTags() if 4001 <= t < 9000]),
+        "lt2_connectors": len([t for t in ops.getEleTags() if 9001 <= t < 10000]),
         "lt1_columns": len(lt1["col_elements"]),
         "lt1_beams": len(lt1["beam_elements"]),
         "lt1_walls": len(lt1["wall_elements"]),
@@ -242,7 +252,8 @@ def write_outputs(report, lt2, lt1, reactions, data):
     add(f"nodos totales              : {st['n_nodes']}")
     add(f"elementos totales          : {st['n_elements']}")
     add(f"nodos interfaz compartidos : {st['n_interface_shared']}")
-    add(f"LT2: vigas={st['lt2_beams']} columnas={st['lt2_cols']}")
+    add(f"LT2: vigas={st['lt2_beams']} columnas={st['lt2_cols']} "
+        f"muros-col={st['lt2_walls']} conectores={st['lt2_connectors']}")
     add(f"LT1: columnas={st['lt1_columns']} vigas={st['lt1_beams']} "
         f"muros={st['lt1_walls']}")
     add(f"carga vertical total LT1   : {st['lt1_total_load_kN']:.6f} kN")
@@ -347,7 +358,8 @@ def print_summary(report):
     print("\n=== RESUMEN COMBINADO ===")
     print(f"rc={st['rc']}  nodos={st['n_nodes']}  elems={st['n_elements']}  "
           f"interfaz={st['n_interface_shared']}")
-    print(f"LT2 vigas={st['lt2_beams']} cols={st['lt2_cols']} | "
+    print(f"LT2 vigas={st['lt2_beams']} cols={st['lt2_cols']} "
+          f"muros-col={st['lt2_walls']} conect={st['lt2_connectors']} | "
           f"LT1 cols={st['lt1_columns']} vigas={st['lt1_beams']} "
           f"muros={st['lt1_walls']}")
     print(f"carga LT1={st['lt1_total_load_kN']:.4f}  LT2={st['lt2_total_load_kN']:.4f} "

@@ -2,5 +2,5 @@ metric,value
 lt2_total_load_kN,11541.291565212
 lt1_total_load_kN,25394.441750117447
 combined_total_load_kN,36935.733315329446
-sum_rz_kN,nan
-equil_rel_err,nan
+sum_rz_kN,36935.73331579239
+equil_rel_err,1.2533861211454862e-11

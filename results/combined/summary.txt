@@ -1,25 +1,25 @@
 MODELO COMBINADO LT1 + LT2  ---  resumen
 ============================================================
-return_code (analyze)      : -3
-nodos totales              : 452
-elementos totales          : 518
+return_code (analyze)      : 0
+nodos totales              : 442
+elementos totales          : 602
 nodos interfaz compartidos : 12
-LT2: vigas=236 columnas=50
+LT2: vigas=230 columnas=50 muros-col=80 conectores=10
 LT1: columnas=39 vigas=175 muros=18
 carga vertical total LT1   : 25394.441750 kN
 carga vertical total LT2   : 11541.291565 kN
 carga vertical combinada   : 36935.733315 kN
-suma reacciones verticales : nan kN
-error relativo equilibrio  : nan
-desplazamiento vertical max: 0.0  en nodo None
+suma reacciones verticales : 36935.733316 kN
+error relativo equilibrio  : 1.253386e-11
+desplazamiento vertical max: -0.1449148185966489  en nodo 1000078
 apoyos considerados        : 37
 
 VERIFICACIONES PREVIAS:
   [OK] nodos_duplicados_geometricos: 0 nodos en misma coord
-  [OK] tags_nodo_duplicados: 452 nodos, 0 tags dup
-  [OK] tags_elemento_duplicados: 518 elementos, 0 tags dup
+  [OK] tags_nodo_duplicados: 442 nodos, 0 tags dup
+  [OK] tags_elemento_duplicados: 602 elementos, 0 tags dup
   [OK] longitud_cero: 0 elementos con L=0
-  [FALLO] elementos_duplicados: 2 pares de nodos con >1 elemento (hereda de LT1; no bloquea)
+  [FALLO] elementos_duplicados: 17 pares de nodos con >1 elemento (hereda de LT1; no bloquea)
   [OK] ref_nodos_inexistentes: 0 refs malas
   [OK] master_existente_1002: master 1002 existe
   [OK] master_existente_1003: master 1003 existe

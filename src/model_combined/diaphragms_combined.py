@@ -22,9 +22,13 @@ from .lt1_builder_combined import build_ops_model_combined
 def _floor_nodes_at_z(lt2: LT2Model, lt1_summary, z, tol=1e-6):
     """Nodos de LT2 y LT1 en el plano z (fusionados, sin duplicados)."""
     out = set()
-    # LT2: usar tag_to_key
+    # LT2: usar tag_to_key (solo nodos que siguen existiendo)
+    existing = set(ops.getNodeTags())
+    exclude = set(getattr(lt2, "diaph_exclude", set()) or set())
     lt2_tags = []
     for t, (x, y, zz) in lt2.tag_to_key.items():
+        if t not in existing or t in exclude:
+            continue
         if abs(zz - z) < tol:
             lt2_tags.append(t)
     out.update(lt2_tags)
