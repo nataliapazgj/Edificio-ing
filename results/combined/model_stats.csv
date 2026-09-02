@@ -1,0 +1,32 @@
+metric,value
+n_nodes,452
+n_elements,518
+n_interface_shared,12
+lt2_beams,236
+lt2_cols,50
+lt1_columns,39
+lt1_beams,175
+lt1_walls,18
+rc,-3
+lt2_total_load_kN,11541.291565212
+lt1_total_load_kN,25394.441750117447
+combined_total_load_kN,36935.733315329446
+sum_rz_kN,nan
+equil_rel_err,nan
+uz_max_m,0.0
+uz_node,
+n_support,37
+check_nodos_duplicados_geometricos,OK|0 nodos en misma coord
+check_tags_nodo_duplicados,"OK|452 nodos, 0 tags dup"
+check_tags_elemento_duplicados,"OK|518 elementos, 0 tags dup"
+check_longitud_cero,OK|0 elementos con L=0
+check_elementos_duplicados,FALLO|2 pares de nodos con >1 elemento (hereda de LT1; no bloquea)
+check_ref_nodos_inexistentes,OK|0 refs malas
+check_master_existente_1002,OK|master 1002 existe
+check_master_existente_1003,OK|master 1003 existe
+check_master_existente_1004,OK|master 1004 existe
+check_master_existente_1005,OK|master 1005 existe
+check_interfaz_12_nodos_compartidos,OK|faltantes: ninguno
+check_columnas_duplicadas_interfaz,OK|0 columnas LT1 entre dos nodos de interfaz (deben ser 0)
+check_conflictos_geomTransf,"OK|LT2 (1, 2, 3) ; LT1 3001..3003 (sin colision)"
+check_sin_solape_espacial,OK|0 nodos LT1 coinciden geometricamente con LT2 ; x_min_LT1=30.900 (interfaz en x=31.25)
