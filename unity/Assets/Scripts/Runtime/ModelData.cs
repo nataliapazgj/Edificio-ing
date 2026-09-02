@@ -36,6 +36,7 @@ namespace EdificioIng.Viewer
         public float y;
         public float z;
         public string level;
+        public string tower;   // "LT1" | "LT2"; null/empty => LT2 (backward compatible)
     }
 
     [Serializable]
@@ -47,6 +48,7 @@ namespace EdificioIng.Viewer
         public float x;
         public float y;
         public float z;
+        public string tower;
     }
 
     [Serializable]
@@ -65,6 +67,7 @@ namespace EdificioIng.Viewer
         public float slab_load_kN;
         public float equivalent_uniform_kN_m;
         public string load_status;
+        public string tower;   // "LT1" | "LT2"; null/empty => LT2
     }
 
     [Serializable]
@@ -81,6 +84,7 @@ namespace EdificioIng.Viewer
         public float x;
         public float y;
         public float length_m;
+        public string tower;   // "LT1" | "LT2"; null/empty => LT2
     }
 
     [Serializable]
@@ -102,6 +106,7 @@ namespace EdificioIng.Viewer
         public string to_level;
         public WallNodesData nodes;
         public string status;
+        public string tower;   // "LT1" | "LT2"; null/empty => LT2
     }
 
     [Serializable]
@@ -119,6 +124,7 @@ namespace EdificioIng.Viewer
         public int rx;
         public int ry;
         public int rz;
+        public string tower;   // "LT1" | "LT2"; null/empty => LT2
     }
 
     [Serializable]
@@ -130,6 +136,7 @@ namespace EdificioIng.Viewer
         public int master_tag;
         public int[] slave_tags;
         public int slave_count;
+        public string tower;   // "LT1" | "LT2"; null/empty => LT2
     }
 
     // Losa QA (representacion, NO elemento estructural). polygon/holes son

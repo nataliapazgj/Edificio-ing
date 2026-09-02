@@ -46,11 +46,15 @@ namespace EdificioIng.Viewer
         void DrawToolbar()
         {
             float x = 12, y = 12, w = 150, h = 24, gap = 6;
-            int rows = 10; // 9 toggles + Frame All
+            int rows = 11; // 1 leyenda + 9 toggles + Frame All
             GUI.Box(new Rect(x - 6, y - 6, w + 12, rows * h + (rows - 1) * gap + 12),
-                "LT2", _title);
+                "Edificio LT1 + LT2", _title);
 
             y += 6;
+            // Leyenda de torre: los colores de vigas/columnas/muros/nodos
+            // distinguen LT1 (claro/vivo) de LT2 (colores historicos).
+            GUI.Label(new Rect(x, y, w, h),
+                "LT1: azul/naranja/purpura   LT2: magenta/cyan/rojo"); y += h + gap;
             _nodesOn = GUI.Toggle(new Rect(x, y, w, h), _nodesOn, "Nodes"); y += h + gap;
             _beamsOn = GUI.Toggle(new Rect(x, y, w, h), _beamsOn, "Beams"); y += h + gap;
             _columnsOn = GUI.Toggle(new Rect(x, y, w, h), _columnsOn, "Columns"); y += h + gap;

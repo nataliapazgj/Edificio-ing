@@ -120,15 +120,19 @@ namespace EdificioIng.Viewer
         {
             foreach (var n in Model.nodes)
             {
+                // Nodos sinteticos (tag<0) solo dan soporte a los quads de muro
+                // LT1; no se dibujan esferas para no ensuciar la vista.
+                if (n.tag < 0) continue;
                 var go = new GameObject("N" + n.tag);
                 go.transform.SetParent(nodeContainer.transform);
                 go.transform.position = NodePos[n.tag];
-                var sphere = SphereBuilder.Create(go, 0.08f, Color.yellow);
+                var color = IsLT1(n.tower) ? NodeLT1 : NodeLT2;
+                var sphere = SphereBuilder.Create(go, 0.08f, color);
                 sphere.name = "N" + n.tag;
                 var info = go.AddComponent<Selectable>();
                 info.Set(new SelectableInfo { category = "node", id = n.tag.ToString(),
-                    label = "Node " + n.tag, extra = "level: " + n.level + "  (" +
-                    F(n.x) + ", " + F(n.y) + ", " + F(n.z) + ")" });
+                    label = "Node " + n.tag, extra = "level: " + n.level + "  tower: " + TowerLabel(n.tower) +
+                    "  (" + F(n.x) + ", " + F(n.y) + ", " + F(n.z) + ")" });
                 AddCollider(go, MeshOf(sphere));
             }
         }
@@ -149,13 +153,15 @@ namespace EdificioIng.Viewer
                 var center = (n1 + n2) * 0.5f + axes.V1 * (h * 0.5f);  // desplazamiento transversal (viga)
                 var mesh = BoxBuilder.Create(n1, n2, axes, h, w);
                 go.transform.position = center;
-                AddMesh(go, mesh, Color.cyan, "Beam_" + b.beam_id);
+                var color = IsLT1(b.tower) ? BeamLT1 : BeamLT2;
+                AddMesh(go, mesh, color, "Beam_" + b.beam_id);
                 go.AddComponent<LocalAxesHost>().Set(axes);
 
                 var pd = BuildBeamInfo(b);
                 go.AddComponent<Selectable>().Set(new SelectableInfo
                 {
-                    category = "beam", id = b.beam_id, label = pd
+                    category = "beam", id = b.beam_id, label = pd,
+                    extra = "tower: " + TowerLabel(b.tower)
                 });
                 AddCollider(go, mesh);
                 i++;
@@ -175,14 +181,16 @@ namespace EdificioIng.Viewer
                 float size = SectionDim(c.section);
                 var mesh = BoxBuilder.Create(n1, n2, axes, size, size);
                 go.transform.position = (n1 + n2) * 0.5f;
-                AddMesh(go, mesh, Color.magenta, "Col_" + c.column_id);
+                var color = IsLT1(c.tower) ? ColLT1 : ColLT2;
+                AddMesh(go, mesh, color, "Col_" + c.column_id);
                 go.AddComponent<LocalAxesHost>().Set(axes);
 
                 string info = "column_id: " + c.column_id + "\nelementTag: " + c.elementTag +
                     "\nsection: " + c.section + "\nstory: " + c.from_level + " to " + c.to_level;
                 go.AddComponent<Selectable>().Set(new SelectableInfo
                 {
-                    category = "column", id = c.column_id, label = info
+                    category = "column", id = c.column_id, label = info,
+                    extra = "tower: " + TowerLabel(c.tower)
                 });
                 AddCollider(go, mesh);
             }
@@ -201,14 +209,16 @@ namespace EdificioIng.Viewer
                 var d = NodePos[w.nodes.top_i];
                 var mesh = QuadBuilder.Create(a, b, c, d, w.thickness_m);
                 go.transform.position = Vector3.zero;
-                AddMesh(go, mesh, Color.red, "Wall_" + w.wall_id);
+                var color = IsLT1(w.tower) ? WallLT1 : WallLT2;
+                AddMesh(go, mesh, color, "Wall_" + w.wall_id);
 
                 string info = "wall_id: " + w.wall_id + "\nthickness: " + F(w.thickness_m) +
                     " m\nlevel: " + w.from_level + " to " + w.to_level +
                     "\nOpenSees: " + w.status;
                 go.AddComponent<Selectable>().Set(new SelectableInfo
                 {
-                    category = "wall", id = w.wall_id, label = info
+                    category = "wall", id = w.wall_id, label = info,
+                    extra = "tower: " + TowerLabel(w.tower)
                 });
                 AddCollider(go, mesh);
             }
@@ -382,6 +392,21 @@ namespace EdificioIng.Viewer
         }
 
         // -------- Mesh/construccion -------------------------------------------
+        static bool IsLT1(string tower) => !string.IsNullOrEmpty(tower) && tower == "LT1";
+
+        static string TowerLabel(string tower) => IsLT1(tower) ? "LT1" : "LT2";
+
+        // Color de familia segun torre (LT2 = colores historicos del viewer).
+        // Los datos del standalone LT2 no llevan "tower" => se tratan como LT2.
+        static readonly Color BeamLT2 = new Color(0.00f, 1.00f, 1.00f); // cyan
+        static readonly Color BeamLT1 = new Color(1.00f, 0.55f, 0.00f); // naranja
+        static readonly Color ColLT2 = new Color(1.00f, 0.00f, 1.00f);  // magenta
+        static readonly Color ColLT1 = new Color(0.20f, 0.50f, 1.00f);  // azul
+        static readonly Color WallLT2 = new Color(1.00f, 0.00f, 0.00f); // rojo
+        static readonly Color WallLT1 = new Color(0.75f, 0.30f, 1.00f); // purpura
+        static readonly Color NodeLT2 = new Color(1.00f, 1.00f, 0.00f); // amarillo
+        static readonly Color NodeLT1 = new Color(0.60f, 0.90f, 1.00f); // celeste
+
         void AddMesh(GameObject go, Mesh mesh, Color color, string meshName)
         {
             var mf = go.GetComponent<MeshFilter>();
