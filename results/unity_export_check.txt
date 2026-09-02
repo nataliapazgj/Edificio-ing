@@ -1,0 +1,15 @@
+UNITY EXPORT QA - results/unity_export_check.txt
+modelo: nodes=187 elements=257 (FE=241 LOAD_ONLY=16) supports=16 diaphragms=4 slabs=4 tributary_areas=175
+==============================================================
+[PASS] elementTag unicos: 241 FE
+[PASS] nodos referenciados por elementos: 0 invalidos
+[PASS] apoyos -> nodos existentes: 0 invalidos
+[PASS] diafragmas exportados: 4/4 (P1/P2/P3/P4)
+[PASS] diafragmas master/slaves validos: ok
+[PASS] tributary beam_elementTag existe: ok
+[PASS] polygons tributarios validos: 136/175 con polygon (invalido: ninguno)
+[PASS] polygons de losa validos: ok
+[PASS] miembros LOAD_ONLY presentes para visualizacion: 16
+[PASS] datos OpenSees NO modificados: ok
+==============================================================
+VEREDICTO: PASS

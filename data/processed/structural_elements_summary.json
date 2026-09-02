@@ -1,0 +1,34 @@
+{
+  "2017_67-100.dxf": {
+    "vigas": 69,
+    "pilares": 24,
+    "muros": 156,
+    "losas": 14,
+    "fundaciones": 199,
+    "proyeccion": 52
+  },
+  "2017_67-101.dxf": {
+    "vigas": 197,
+    "pilares": 94,
+    "muros": 244,
+    "losas": 25,
+    "fundaciones": 0,
+    "proyeccion": 81
+  },
+  "2017_67-102.dxf": {
+    "vigas": 237,
+    "pilares": 196,
+    "muros": 36,
+    "losas": 34,
+    "fundaciones": 0,
+    "proyeccion": 761
+  },
+  "2017_67-103.dxf": {
+    "vigas": 146,
+    "pilares": 200,
+    "muros": 303,
+    "losas": 50,
+    "fundaciones": 0,
+    "proyeccion": 13
+  }
+}

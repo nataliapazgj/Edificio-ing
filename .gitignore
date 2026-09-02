@@ -1,37 +1,8 @@
-# Python
+
+# Unity temporary files
+unity/**/Temp/
+unity/**/Library/
+unity/**/Logs/
+unity/**/obj/
 __pycache__/
-*.py[cod]
-*.pyo
-.pytest_cache/
-
-# Virtual environment
-.venv/
-venv/
-
-# IDE / editor
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Unity
-unity/Library/
-unity/Temp/
-unity/Logs/
-unity/Obj/
-unity/Build/
-unity/Builds/
-unity/UserSettings/
-unity/*.csproj
-unity/*.sln
-unity/*.user
-unity/.vsconfig
-unity/.vs/
-unity/Assets/*.csproj
-
-# Revision crops (auxiliar, no versionar)
-review_crops/loads_700/
-review_crops/slabs/
-review_crops/validation/
+*.pyc

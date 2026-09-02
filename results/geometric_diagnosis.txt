@@ -1,0 +1,514 @@
+==========================================================================================
+  FASE 2: DIAGNOSTICO GEOMETRICO — EDIFICIO DE INGENIERIA
+==========================================================================================
+
+  Factor de conversion determinado: 100 unidades CAD = 1 metro
+
+  EVIDENCIA 1: Dimensiones de pilares (RLE-PILAR)
+  Los pilares son cuadrados de lado constante.
+  Todos los lados miden 70.00 unidades CAD.
+  En ingenieria estructural, pilares cuadrados de 0.70 m son estandar.
+  70.00 CAD / 100 = 0.70 m  ✓
+
+  EVIDENCIA 2: Separacion entre caras de vigas (RLE-VIGA)
+  Las vigas aparecen como pares de lineas paralelas.
+  Separacion tipica: 20.00 unidades CAD.
+  En la capa RLE-VIGA del 2017_67-100:
+    Líneas en y=5510.14 y y=5530.14 → separacion = 20.00 CAD = 0.20 m  ✓
+  Esto corresponde al ancho de viga de 20 cm.
+
+  EVIDENCIA 3: Espesor de muros (RLE-MURO)
+  Muros aparecen como pares de lineas paralelas.
+  Separacion tipica: 20.00 unidades CAD = 0.20 m.
+  Ejemplo (2017_67-100): lineas en x=767.06 y x=787.06 → 20.00 CAD  ✓
+
+  EVIDENCIA 4: Separaciones entre ejes estructurales
+  Ejes verticales (letras) en 2017_67-100:
+    E = x=802.06, F = x=1802.06 → 1000.00 CAD = 10.00 m
+    F = x=1802.06, G = x=2802.06 → 1000.00 CAD = 10.00 m
+    G = x=2802.06, H = x=3802.06 → 1000.00 CAD = 10.00 m
+    H = x=3802.06, I = x=4802.06 → 1000.00 CAD = 10.00 m
+    I = x=4802.06, I'= x=5302.06 → 500.00 CAD = 5.00 m
+  Ejes horizontales (numeros) en 2017_67-100:
+    1 = y=6415.45, 2 = y=5520.14 → 895.31 CAD ≈ 8.95 m
+  Verificacion: vigas de 930 CAD = 9.30 m entre caras interiores
+    de pilares de 70 CAD = 0.70 m → eje a eje = 9.30 + 0.70 = 10.00 m  ✓
+
+  EVIDENCIA 5: Largos de vigas entre centros de pilar
+  Vigas horizontales en RLE-VIGA del 2017_67-100:
+    Largo tipico = 930.00 CAD = 9.30 m (entre caras de pilar)
+    Centros de pilar = 930 + 70 = 1000.00 CAD = 10.00 m (eje a eje)  ✓
+
+  EVIDENCIA 6: Bloque nivel-el
+  El bloque 'nivel-el' aparece 4 veces en 2017_67-100.
+  Simboliza cotas de nivel con flecha y texto.
+  Radio del circulo de eje (RLE-EJE): 43.75 CAD = 0.4375 m = ~44 cm  ✓
+  (diametro ~88 cm, estandar para rotulos de eje en planos 1:75)
+
+  EVIDENCIA 7: Bloques de vigas de cajon en 2017_67-102
+  'RLA-VIGAS-CAJONES - V_M_ 300x300x5' → 300 mm = 0.30 m = 30 CAD  ✓
+  (coincide con el factor 100:1)
+
+  ──────────────────────────────────────────────────────────────────
+  CONCLUSION: Factor de conversion = 100 CAD = 1 metro
+  Justificado con 7 evidencias independientes.
+  ──────────────────────────────────────────────────────────────────
+
+==========================================================================================
+  VERIFICACIONES DIMENSIONALES (texto DIMENSION vs distancia CAD)
+==========================================================================================
+
+  Total cotas parseadas: 1
+
+  Archivo                 Capa             Texto         CAD      m(CAD)     Ratio    OK?
+  -------------------------------------------------------------------------------------
+  2017_67-101.dxf         RLA-COTAS         0.80       28.50        0.29    0.3563      ?
+
+  NOTA: Las cotas DIMENSION pueden estar en un sistema de escala
+  diferente al del modelo. Se confirma el factor con geometria.
+
+==========================================================================================
+  EJES ESTRUCTURALES IDENTIFICADOS
+==========================================================================================
+
+  2017_67-100.dxf:
+    Ejes verticales (X constante):
+         ?  x=    347.92 CAD  =     3.479 m
+         ?  x=    349.03 CAD  =     3.490 m
+         ?  x=    352.39 CAD  =     3.524 m
+         ?  x=    356.87 CAD  =     3.569 m
+        E'  x=    697.66 CAD  =     6.977 m
+        E'  x=    697.66 CAD  =     6.977 m
+         E  x=    777.06 CAD  =     7.771 m
+         E  x=    802.06 CAD  =     8.021 m
+        Ea  x=   1132.06 CAD  =    11.321 m
+        Eb  x=   1162.06 CAD  =    11.621 m
+        Ec  x=   1442.06 CAD  =    14.421 m
+        Ed  x=   1472.06 CAD  =    14.721 m
+         F  x=   1802.06 CAD  =    18.021 m
+         F  x=   1827.06 CAD  =    18.271 m
+        F'  x=   1915.09 CAD  =    19.151 m
+         G  x=   2802.06 CAD  =    28.021 m
+        Ga  x=   2947.06 CAD  =    29.471 m
+         ?  x=   3349.77 CAD  =    33.498 m
+         H  x=   3802.06 CAD  =    38.021 m
+         ?  x=   4184.56 CAD  =    41.846 m
+        H1  x=   4184.56 CAD  =    41.846 m
+        H'  x=   4249.77 CAD  =    42.498 m
+        H2  x=   4684.56 CAD  =    46.846 m
+         I  x=   4802.06 CAD  =    48.021 m
+        IA  x=   5062.06 CAD  =    50.621 m
+        I'  x=   5302.06 CAD  =    53.021 m
+        I'  x=   5314.99 CAD  =    53.150 m
+        I'  x=   5336.59 CAD  =    53.366 m
+        IB  x=   5389.56 CAD  =    53.896 m
+         ?  x=   5674.09 CAD  =    56.741 m
+         ?  x=   5676.32 CAD  =    56.763 m
+         ?  x=   5677.84 CAD  =    56.778 m
+    Ejes horizontales (Y constante):
+         ?  y=   7925.13 CAD  =    79.251 m
+         ?  y=   7906.89 CAD  =    79.069 m
+        1C  y=   7481.09 CAD  =    74.811 m
+         8  y=   7275.13 CAD  =    72.751 m
+       1BB  y=   7032.63 CAD  =    70.326 m
+        1A  y=   6767.63 CAD  =    67.676 m
+        1A  y=   6767.63 CAD  =    67.676 m
+       1AA  y=   6585.14 CAD  =    65.851 m
+        1b  y=   6522.06 CAD  =    65.221 m
+        1'  y=   6511.05 CAD  =    65.110 m
+        1'  y=   6465.14 CAD  =    64.651 m
+        1'  y=   6462.63 CAD  =    64.626 m
+        1'  y=   6435.13 CAD  =    64.351 m
+        1'  y=   6415.45 CAD  =    64.154 m
+        1'  y=   6410.14 CAD  =    64.101 m
+         1  y=   6311.66 CAD  =    63.117 m
+       1''  y=   6020.13 CAD  =    60.201 m
+         ?  y=   5800.13 CAD  =    58.001 m
+         2  y=   5520.14 CAD  =    55.201 m
+         ?  y=   5495.14 CAD  =    54.951 m
+        2a  y=   5025.63 CAD  =    50.256 m
+         3  y=   4795.13 CAD  =    47.951 m
+         3  y=   4770.13 CAD  =    47.701 m
+        3'  y=   4692.47 CAD  =    46.925 m
+        3'  y=   4692.47 CAD  =    46.925 m
+         ?  y=   4518.90 CAD  =    45.189 m
+         ?  y=   4047.69 CAD  =    40.477 m
+         ?  y=   3576.47 CAD  =    35.765 m
+         ?  y=   3302.60 CAD  =    33.026 m
+         ?  y=   3302.60 CAD  =    33.026 m
+         ?  y=   3293.47 CAD  =    32.935 m
+
+  2017_67-101.dxf:
+    Ejes verticales (X constante):
+         ?  x=    604.81 CAD  =     6.048 m
+         ?  x=    606.29 CAD  =     6.063 m
+         ?  x=    623.95 CAD  =     6.239 m
+        E'  x=    956.92 CAD  =     9.569 m
+        E'  x=    961.99 CAD  =     9.620 m
+        E'  x=    961.99 CAD  =     9.620 m
+         E  x=   1036.32 CAD  =    10.363 m
+         E  x=   1036.32 CAD  =    10.363 m
+         E  x=   1061.32 CAD  =    10.613 m
+         E  x=   1061.32 CAD  =    10.613 m
+         ?  x=   1311.32 CAD  =    13.113 m
+        Ea  x=   1391.32 CAD  =    13.913 m
+        Ea  x=   1391.32 CAD  =    13.913 m
+        Eb  x=   1421.32 CAD  =    14.213 m
+        Eb  x=   1421.32 CAD  =    14.213 m
+         ?  x=   1561.32 CAD  =    15.613 m
+        Ec  x=   1701.32 CAD  =    17.013 m
+        Ec  x=   1701.32 CAD  =    17.013 m
+        Ed  x=   1731.32 CAD  =    17.313 m
+        Ed  x=   1731.32 CAD  =    17.313 m
+         ?  x=   1811.32 CAD  =    18.113 m
+         F  x=   2061.32 CAD  =    20.613 m
+         F  x=   2061.32 CAD  =    20.613 m
+         F  x=   2086.32 CAD  =    20.863 m
+        F'  x=   2166.03 CAD  =    21.660 m
+         ?  x=   2311.32 CAD  =    23.113 m
+         ?  x=   2561.32 CAD  =    25.613 m
+         ?  x=   2561.32 CAD  =    25.613 m
+         ?  x=   2810.32 CAD  =    28.103 m
+         ?  x=   2811.32 CAD  =    28.113 m
+         G  x=   3061.32 CAD  =    30.613 m
+         G  x=   3061.32 CAD  =    30.613 m
+        Ga  x=   3206.32 CAD  =    32.063 m
+         ?  x=   3561.32 CAD  =    35.613 m
+         ?  x=   3847.83 CAD  =    38.478 m
+         ?  x=   3852.44 CAD  =    38.524 m
+         H  x=   4061.32 CAD  =    40.613 m
+        H1  x=   4443.82 CAD  =    44.438 m
+        H'  x=   4509.03 CAD  =    45.090 m
+         ?  x=   4561.32 CAD  =    45.613 m
+         ?  x=   4826.32 CAD  =    48.263 m
+        H2  x=   4943.82 CAD  =    49.438 m
+         I  x=   5061.32 CAD  =    50.613 m
+        IA  x=   5321.32 CAD  =    53.213 m
+        I'  x=   5561.32 CAD  =    55.613 m
+        I'  x=   5595.85 CAD  =    55.958 m
+        IB  x=   5648.82 CAD  =    56.488 m
+         ?  x=   5937.10 CAD  =    59.371 m
+         ?  x=   5952.10 CAD  =    59.521 m
+    Ejes horizontales (Y constante):
+         ?  y=   8462.19 CAD  =    84.622 m
+         ?  y=   8237.14 CAD  =    82.371 m
+         ?  y=   8173.60 CAD  =    81.736 m
+         8  y=   8030.14 CAD  =    80.301 m
+         ?  y=   8022.64 CAD  =    80.226 m
+        1b  y=   7374.01 CAD  =    73.740 m
+        1'  y=   7266.98 CAD  =    72.670 m
+        1'  y=   7220.15 CAD  =    72.202 m
+         1  y=   7190.14 CAD  =    71.901 m
+         1  y=   7165.15 CAD  =    71.652 m
+         1  y=   7117.53 CAD  =    71.175 m
+       1''  y=   6775.14 CAD  =    67.751 m
+         2  y=   6275.15 CAD  =    62.752 m
+        2a  y=   5780.64 CAD  =    57.806 m
+         3  y=   5550.14 CAD  =    55.501 m
+         3  y=   5525.14 CAD  =    55.251 m
+        3'  y=   5447.77 CAD  =    54.478 m
+        3'  y=   5447.77 CAD  =    54.478 m
+         ?  y=   5294.59 CAD  =    52.946 m
+         ?  y=   5291.38 CAD  =    52.914 m
+         ?  y=   4887.60 CAD  =    48.876 m
+        1C  y=   4627.72 CAD  =    46.277 m
+       1BB  y=   4180.51 CAD  =    41.805 m
+        1A  y=   3915.51 CAD  =    39.155 m
+       1AA  y=   3733.02 CAD  =    37.330 m
+        1'  y=   3645.52 CAD  =    36.455 m
+        1'  y=   3610.51 CAD  =    36.105 m
+         1  y=   3583.01 CAD  =    35.830 m
+         1  y=   3558.02 CAD  =    35.580 m
+       1''  y=   3168.01 CAD  =    31.680 m
+         2  y=   2668.02 CAD  =    26.680 m
+        2a  y=   2173.51 CAD  =    21.735 m
+         3  y=   1943.01 CAD  =    19.430 m
+         ?  y=   1896.01 CAD  =    18.960 m
+         ?  y=   1671.78 CAD  =    16.718 m
+         ?  y=   1531.01 CAD  =    15.310 m
+         ?  y=   1195.56 CAD  =    11.956 m
+         ?  y=    724.35 CAD  =     7.244 m
+         ?  y=    714.19 CAD  =     7.142 m
+         ?  y=    513.95 CAD  =     5.140 m
+
+  2017_67-102.dxf:
+    Ejes verticales (X constante):
+         E  x=    534.97 CAD  =     5.350 m
+        Ea  x=    864.97 CAD  =     8.650 m
+         E  x=    893.23 CAD  =     8.932 m
+        Eb  x=    894.97 CAD  =     8.950 m
+        Ec  x=   1174.97 CAD  =    11.750 m
+        Ed  x=   1204.97 CAD  =    12.050 m
+        Ea  x=   1223.23 CAD  =    12.232 m
+        Eb  x=   1253.23 CAD  =    12.532 m
+        Ec  x=   1533.23 CAD  =    15.332 m
+         F  x=   1534.97 CAD  =    15.350 m
+        Ed  x=   1563.23 CAD  =    15.632 m
+         ?  x=   1754.97 CAD  =    17.550 m
+         F  x=   1893.23 CAD  =    18.932 m
+         ?  x=   2034.97 CAD  =    20.350 m
+         ?  x=   2393.23 CAD  =    23.932 m
+         G  x=   2534.97 CAD  =    25.350 m
+         ?  x=   2642.23 CAD  =    26.422 m
+         G  x=   2893.23 CAD  =    28.932 m
+         ?  x=   3034.97 CAD  =    30.350 m
+         ?  x=   3393.23 CAD  =    33.932 m
+         H  x=   3534.97 CAD  =    35.350 m
+         H  x=   3893.23 CAD  =    38.932 m
+         ?  x=   4034.97 CAD  =    40.350 m
+         ?  x=   4393.23 CAD  =    43.932 m
+         I  x=   4534.97 CAD  =    45.350 m
+         I  x=   4893.23 CAD  =    48.932 m
+        I'  x=   5034.97 CAD  =    50.350 m
+         ?  x=   5289.97 CAD  =    52.900 m
+        I'  x=   5393.23 CAD  =    53.932 m
+         J  x=   5534.97 CAD  =    55.350 m
+         ?  x=   5765.25 CAD  =    57.652 m
+    Ejes horizontales (Y constante):
+        1'  y=   7985.83 CAD  =    79.858 m
+         1  y=   7909.91 CAD  =    79.099 m
+         1  y=   7884.92 CAD  =    78.849 m
+       1''  y=   7494.91 CAD  =    74.949 m
+         2  y=   6994.92 CAD  =    69.949 m
+        2a  y=   6500.41 CAD  =    65.004 m
+         3  y=   6269.91 CAD  =    62.699 m
+         ?  y=   6023.92 CAD  =    60.239 m
+         ?  y=   5857.91 CAD  =    58.579 m
+         1  y=   4260.35 CAD  =    42.603 m
+       1''  y=   3870.33 CAD  =    38.703 m
+         2  y=   3370.35 CAD  =    33.703 m
+        2a  y=   2875.83 CAD  =    28.758 m
+         3  y=   2645.33 CAD  =    26.453 m
+         ?  y=   2399.35 CAD  =    23.993 m
+         ?  y=   2233.33 CAD  =    22.333 m
+
+  2017_67-103.dxf:
+    Ejes verticales (X constante):
+         E  x=    490.33 CAD  =     4.903 m
+        Ea  x=    820.33 CAD  =     8.203 m
+        Eb  x=    850.33 CAD  =     8.503 m
+        Ec  x=   1130.33 CAD  =    11.303 m
+        Ed  x=   1160.33 CAD  =    11.603 m
+         F  x=   1490.33 CAD  =    14.903 m
+         ?  x=   1990.33 CAD  =    19.903 m
+         G  x=   2490.33 CAD  =    24.903 m
+         ?  x=   2990.33 CAD  =    29.903 m
+         H  x=   3490.33 CAD  =    34.903 m
+         ?  x=   3990.33 CAD  =    39.903 m
+         I  x=   4490.33 CAD  =    44.903 m
+        I'  x=   4990.33 CAD  =    49.903 m
+         ?  x=   5245.33 CAD  =    52.453 m
+         J  x=   5490.33 CAD  =    54.903 m
+    Ejes horizontales (Y constante):
+         1  y=   6279.18 CAD  =    62.792 m
+       1''  y=   5889.16 CAD  =    58.892 m
+         2  y=   5389.18 CAD  =    53.892 m
+        2a  y=   4894.66 CAD  =    48.947 m
+         3  y=   4664.16 CAD  =    46.642 m
+         ?  y=   4252.16 CAD  =    42.522 m
+
+==========================================================================================
+  COMPATIBILIDAD DE SISTEMAS XY ENTRE PLANTAS
+==========================================================================================
+
+  Ejes comunes entre archivos (coordenadas en metros):
+         Eje     100.dxf     101.dxf     102.dxf     103.dxf  Delta_max
+  --------------------------------------------------------------------------------
+  H_       1      63.117      71.901      79.099      62.792    16.307
+  H_      1'      64.651      72.670      79.858         ---    15.207
+  H_     1''      60.201      67.751      74.949      58.892    16.057
+  H_      1A      67.676      39.155         ---         ---    28.521
+  H_     1AA      65.851      37.330         ---         ---    28.521
+  H_     1BB      70.326      41.805         ---         ---    28.521
+  H_      1C      74.811      46.277         ---         ---    28.534
+  H_      1b      65.221      73.740         ---         ---     8.519
+  H_       2      55.201      62.752      69.949      53.892    16.057
+  H_      2a      50.256      57.806      65.004      48.947    16.057
+  H_       3      47.701      55.251      62.699      46.642    16.057
+  H_      3'      46.925      54.478         ---         ---     7.553
+  H_       8      72.751      80.301         ---         ---     7.550
+  V_       E       7.771      10.363       8.932       4.903     5.460
+  V_      E'       6.977       9.620         ---         ---     2.643
+  V_      Ea      11.321      13.913      12.232       8.203     5.710
+  V_      Eb      11.621      14.213      12.532       8.503     5.710
+  V_      Ec      14.421      17.013      15.332      11.303     5.710
+  V_      Ed      14.721      17.313      15.632      11.603     5.710
+  V_       F      18.271      20.863      18.932      14.903     5.960
+  V_      F'      19.151      21.660         ---         ---     2.509
+  V_       G      28.021      30.613      28.932      24.903     5.710
+  V_      Ga      29.471      32.063         ---         ---     2.593
+  V_       H      38.021      40.613      38.932      34.903     5.710
+  V_      H'      42.498      45.090         ---         ---     2.593
+  V_      H1      41.846      44.438         ---         ---     2.593
+  V_      H2      46.846      49.438         ---         ---     2.593
+  V_       I      48.021      50.613      48.932      44.903     5.710
+  V_      I'      53.021      55.613      53.932      49.903     5.710
+  V_      IA      50.621      53.213         ---         ---     2.593
+  V_      IB      53.896      56.488         ---         ---     2.593
+  V_       J         ---         ---      55.350      54.903     0.446
+
+  Si Delta_max > 0.5 m para un eje comun, hay desalineacion.
+  Los archivos pueden contener planos de diferentes niveles
+  con sistemas de coordenadas parcialmente desplazados.
+
+==========================================================================================
+  ANALISIS DE CAPAS ESTRUCTURALES
+==========================================================================================
+
+  2017_67-100.dxf:
+    vigas          : 69 entidades
+    pilares        : 24 entidades
+    muros          : 156 entidades
+    losas          : 14 entidades
+    fundaciones    : 199 entidades
+    proyeccion     : 52 entidades
+
+  2017_67-101.dxf:
+    vigas          : 197 entidades
+    pilares        : 94 entidades
+    muros          : 244 entidades
+    losas          : 25 entidades
+    fundaciones    : 0 entidades
+    proyeccion     : 81 entidades
+
+  2017_67-102.dxf:
+    vigas          : 237 entidades
+    pilares        : 196 entidades
+    muros          : 36 entidades
+    losas          : 34 entidades
+    fundaciones    : 0 entidades
+    proyeccion     : 761 entidades
+
+  2017_67-103.dxf:
+    vigas          : 146 entidades
+    pilares        : 200 entidades
+    muros          : 303 entidades
+    losas          : 50 entidades
+    fundaciones    : 0 entidades
+    proyeccion     : 13 entidades
+
+==========================================================================================
+  CLASIFICACION DE GEOMETRIA POR TIPO
+==========================================================================================
+
+  A) GEOMETRIA REAL DEL NIVEL (capas RLE-*):
+     - RLE-VIGA: vigas del nivel representado
+     - RLE-PILAR: columnas/pilares del nivel
+     - RLE-MURO: muros estructurales del nivel
+     - RLE-LOSA: contornos de losa del nivel
+     - RLE-FUNDACION: fundaciones (solo en 2017_67-100)
+
+  B) PROYECCIONES DE OTROS NIVELES (capa RLE-PROYECCION):
+     - Elementos de otros niveles proyectados sobre este plano
+     - NO deben usarse como geometria structural del nivel actual
+     - Contiene: vigas, arcos, polilineas proyectadas
+     - En 2017_67-102: 979 entidades (mayoritariamente proyecciones)
+
+  C) ANOTACIONES Y ELEMENTOS GRAFICOS:
+     - RLE-EJE / RLE-EJES: ejes estructurales (referencia, no element)
+     - RLE-TEXTO-1, RLA-TEXTOS1/2: textos descriptivos
+     - RLA-COTAS / RLA-COTAS1: cotas dimensionales
+     - RLA-FORMATO: marco del plano
+     - RLE-SOLID: rellenos de secciones
+     - DEFPOINTS: puntos de referencia de AutoCAD
+     - Bloques FLECHA, nivel-el, Alfa, TICK1: graficos de anotacion
+
+  2017_67-100.dxf:
+    Geometria real:     vigas=69, pilares=24, muros=156, losas=14
+    Fundaciones:        199 entidades
+    Proyecciones:       52 entidades (NO usar como real)
+
+  2017_67-101.dxf:
+    Geometria real:     vigas=197, pilares=94, muros=244, losas=25
+    Proyecciones:       81 entidades (NO usar como real)
+
+  2017_67-102.dxf:
+    Geometria real:     vigas=237, pilares=196, muros=36, losas=34
+    Proyecciones:       761 entidades (NO usar como real)
+
+  2017_67-103.dxf:
+    Geometria real:     vigas=146, pilares=200, muros=303, losas=50
+    Proyecciones:       13 entidades (NO usar como real)
+
+  IMPORTANTE: Para el modelo OpenSees, usar SOLO capas RLE-*.
+  No usar RLE-PROYECCION sin justificacion explicita.
+
+==========================================================================================
+  GENERACION DE FIGURAS DE DIAGNOSTICO
+==========================================================================================
+
+  Guardada: figures/2017_67-100_diagnostico.png
+  Guardada: figures/2017_67-101_diagnostico.png
+  Guardada: figures/2017_67-102_diagnostico.png
+  Guardada: figures/2017_67-103_diagnostico.png
+
+  Generando figura comparativa de ejes entre plantas...
+  Guardada: figures/comparacion_ejes.png
+
+==========================================================================================
+  GUARDADO DE DATOS PROCESADOS
+==========================================================================================
+
+  Guardado: data/processed/axes.json
+  Guardado: data/processed/structural_elements_summary.json
+  Guardado: data/processed/dimension_checks.json
+  Guardado: data/processed/conversion_factor.json
+
+==========================================================================================
+  VERIFICACIONES AUTOMATICAS
+==========================================================================================
+
+  V1 — Factor de conversion:
+         Factor = 100 CAD = 1 m
+         Evidencias: 7 mediciones independientes
+         Estado: CONSISTENTE ✓
+
+  V2 — Consistencia de ejes comunes entre plantas:
+         Ejes con desalineacion > 0.5 m: 31
+           v_E: delta = 5.460 m
+           h_1': delta = 15.207 m
+           v_F: delta = 5.960 m
+           h_3: delta = 16.057 m
+           v_H': delta = 2.593 m
+           v_Ec: delta = 5.710 m
+           v_Eb: delta = 5.710 m
+           h_2a: delta = 16.057 m
+           h_1'': delta = 16.057 m
+           v_Ed: delta = 5.710 m
+           v_Ea: delta = 5.710 m
+           h_3': delta = 7.553 m
+           v_F': delta = 2.509 m
+           h_1b: delta = 8.519 m
+           v_E': delta = 2.643 m
+           h_2: delta = 16.057 m
+           h_8: delta = 7.550 m
+           v_Ga: delta = 2.593 m
+           v_I': delta = 5.710 m
+           h_1: delta = 16.307 m
+           v_H: delta = 5.710 m
+           v_I: delta = 5.710 m
+           v_G: delta = 5.710 m
+           v_IA: delta = 2.593 m
+           v_H1: delta = 2.593 m
+           v_IB: delta = 2.593 m
+           h_1BB: delta = 28.521 m
+           h_1A: delta = 28.521 m
+           h_1C: delta = 28.534 m
+           v_H2: delta = 2.593 m
+           h_1AA: delta = 28.521 m
+         Esto es normal: los archivos contienen plantas de diferentes
+         niveles con sistemas de coordenadas propios.
+
+  V3 — Integridad de archivos DXF originales:
+         OK — Ningun DXF fue modificado ✓
+
+  V4 — Archivos de salida generados:
+         data\processed\axes.json: OK
+         data\processed\structural_elements_summary.json: OK
+         data\processed\dimension_checks.json: OK
+         data\processed\conversion_factor.json: OK
+         figures\2017_67-100_diagnostico.png: OK
+         figures\2017_67-101_diagnostico.png: OK
+         figures\2017_67-102_diagnostico.png: OK
+         figures\2017_67-103_diagnostico.png: OK
+         figures/comparacion_ejes.png: OK

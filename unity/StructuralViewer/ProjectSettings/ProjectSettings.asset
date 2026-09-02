@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!129 &1
+PlayerSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 26
+  productGUID: 6a1f2c3d4e5f60718293a4b5c6d7e806
+  AndroidProfiler: 0
+  companyName: Proyecto1_MCOC
+  productName: StructuralViewer
+  defaultCursor: {fileID: 0}
+  cursorHotspot: {x: 0, y: 0}
+  m_ProductGUID: 6a1f2c3d4e5f60718293a4b5c6d7e806
+  defaultScreenWidth: 1280
+  defaultScreenHeight: 720
+  defaultScreenWidthWeb: 960
+  defaultScreenHeightWeb: 600
+  m_StereoRenderingPath: 0
+  m_ActiveColorSpace: 0
+  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+  m_SplashScreenAnimation: 1
+  m_ShowUnitySplashScreen: 1
+  m_ShowUnitySplashLogo: 1
+  applicationIdentifier:
+    Standalone: com.Proyecto1MCOC.StructuralViewer
+  buildNumber:
+    Standalone: 0
+  overrideDefaultApplicationIdentifier: 1
+  bundleVersion: 1.0
+  preloadedAssets: []
+  metroInputSource: 0
+  wsaTransparentSwapchain: 0
+  m_HolographicPauseOnTrackingLoss: 1
+  xboxEnableAvatar: 0
+  xboxEnableKinect: 0
+  enable360StereoCapture: 0
+  isWsaHolographicRemotingEnabled: 0
+  enableFrameStats: 1
+  useHDRDisplay: 0
+  hdrBitDepth: 0
+  m_ColorGradingMode: 1
+  allowHDRDisplaySupport: 0
+  d3d9FullscreenMode: 1
+  d3d11FullscreenMode: 1
+  d3d11HDRReferenceWhiteLevel: 100
+  m_StackTraceTypes: 010000000100000001000000010000000100000001000000

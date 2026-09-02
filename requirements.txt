@@ -1,6 +1,5 @@
-numpy
-pandas
-matplotlib
-shapely
 openseespy
-pytest
+numpy
+matplotlib
+plotly
+ezdxf

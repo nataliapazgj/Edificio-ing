@@ -1,0 +1,118 @@
+[
+  {
+    "slab_id": "SL-P1-01",
+    "level": "P1",
+    "polygon": [
+      [
+        -0.0,
+        -16.4
+      ],
+      [
+        45.0,
+        -16.4
+      ],
+      [
+        45.0,
+        -0.25
+      ],
+      [
+        -0.0,
+        -0.25
+      ]
+    ],
+    "area_m2": 726.75,
+    "thickness_m": 0.15,
+    "self_weight_kN_m2": 3.75,
+    "finishes_kN_m2": 0.0,
+    "q_G_kN_m2": 3.75,
+    "status": "PROVISIONAL",
+    "source": "casco convexo reticula pilares v2 (losas DXF parciales)"
+  },
+  {
+    "slab_id": "SL-P2-01",
+    "level": "P2",
+    "polygon": [
+      [
+        -0.0,
+        -16.4
+      ],
+      [
+        45.0,
+        -16.4
+      ],
+      [
+        45.0,
+        -0.25
+      ],
+      [
+        -0.0,
+        -0.25
+      ]
+    ],
+    "area_m2": 726.75,
+    "thickness_m": 0.15,
+    "self_weight_kN_m2": 3.75,
+    "finishes_kN_m2": 0.0,
+    "q_G_kN_m2": 3.75,
+    "status": "PROVISIONAL",
+    "source": "casco convexo reticula pilares v2 (losas DXF parciales)"
+  },
+  {
+    "slab_id": "SL-P3-01",
+    "level": "P3",
+    "polygon": [
+      [
+        -0.0,
+        -16.4
+      ],
+      [
+        45.0,
+        -16.4
+      ],
+      [
+        45.0,
+        -0.25
+      ],
+      [
+        -0.0,
+        -0.25
+      ]
+    ],
+    "area_m2": 726.75,
+    "thickness_m": 0.15,
+    "self_weight_kN_m2": 3.75,
+    "finishes_kN_m2": 0.0,
+    "q_G_kN_m2": 3.75,
+    "status": "PROVISIONAL",
+    "source": "casco convexo reticula pilares v2 (losas DXF parciales)"
+  },
+  {
+    "slab_id": "SL-P4-01",
+    "level": "P4",
+    "polygon": [
+      [
+        -0.0,
+        -16.4
+      ],
+      [
+        45.0,
+        -16.4
+      ],
+      [
+        45.0,
+        -0.25
+      ],
+      [
+        -0.0,
+        -0.25
+      ]
+    ],
+    "area_m2": 726.75,
+    "thickness_m": 0.15,
+    "self_weight_kN_m2": 3.75,
+    "finishes_kN_m2": 0.0,
+    "q_G_kN_m2": 3.75,
+    "status": "PROVISIONAL",
+    "source": "casco convexo reticula pilares v2 (losas DXF parciales)"
+  }
+]

@@ -1,0 +1,486 @@
+REPORTE DE INSPECCION DXF — ETAPA 2
+Proyecto 1 MCOC — Metodos Computacionales
+
+Este reporte es generado automaticamente por src/inspect_dxf.py
+No se modificaron los archivos DXF originales.
+
+================================================================================
+  ARCHIVO: 2017_67-100.dxf
+================================================================================
+  SHA-256: 72f846fa9ffb84adf4aed41a4126bcdfd1b8231fd9ee1eae66e0435a0eee02ad
+  Tamano:  4,298,294 bytes
+
+  Lectura DXF: OK
+  Unidades ($INSUNITS): Unspecified
+  Version DXF: AC1032
+
+  Extension geometrica (calculada manualmente):
+    Min: (-4630.6255, 0.0000, 0.0000)
+    Max: (6082.5000, 18959.1965, 0.0000)
+    Dimensiones: 10713.1255 x 18959.1965 x 0.0000
+
+  Total entidades (modelspace): 1829
+
+  Tipos de entidad (todas las capas):
+    Tipo                  Cantidad
+    --------------------------------
+    LINE                       985
+    MTEXT                      204
+    DIMENSION                  193
+    HATCH                      162
+    TEXT                       135
+    CIRCLE                     117
+    LWPOLYLINE                  17
+    INSERT                      13
+    ARC                          3
+
+  Bloques definidos (no anonimos): 6
+    - A$C275F4B4F
+    - Alfa
+    - FLECHA
+    - TICK1
+    - nivel-el
+    - viñeta-rl
+
+  Bloques referenciados (INSERT):
+    - nivel-el: 4 inserciones
+    - FLECHA: 4 inserciones
+    - Alfa: 3 inserciones
+    - viñeta-rl: 1 inserciones
+    - A$C275F4B4F: 1 inserciones
+
+  Capas y entidades por capa:
+    Capa                             Entidades  Tipos
+    --------------------------------------------------------------------------------
+    0                                       20  INSERT:10, LINE:9, TEXT:1
+    A-GENM                                  16  LINE:10, HATCH:6
+    CONTORNOS                               27  LINE:21, LWPOLYLINE:6
+    DEFPOINTS                              168  TEXT:94, LINE:56, HATCH:18
+    RLA-CORTES                             116  LINE:73, TEXT:13, DIMENSION:10, LWPOLYLINE:9, HATCH:7, CIRCLE:2, MTEXT:2
+    RLA-COTAS                               51  DIMENSION:51  [niveles]
+    RLA-COTAS1                             132  DIMENSION:132  [niveles]
+    RLA-FORMATO                             36  LINE:21, TEXT:14, INSERT:1
+    RLA-NIVELES                              4  TEXT:4  [niveles]
+    RLA-SOLID                                1  HATCH:1
+    RLA-TEXTOS-1                            14  TEXT:7, LINE:6, MTEXT:1
+    RLA-TEXTOS1                              8  LINE:4, HATCH:2, INSERT:2
+    RLA-TEXTOS2                              5  LINE:3, TEXT:2
+    RLE-EJE                                 88  MTEXT:44, CIRCLE:44  [ejes]
+    RLE-EJES                                63  LINE:63  [ejes]
+    RLE-FUNDACION                          199  LINE:199  [fundaciones]
+    RLE-LOSA                                14  LINE:14  [losas]
+    RLE-MURO                               158  LINE:156, LWPOLYLINE:2  [muros]
+    RLE-NIVELES                            427  LINE:196, MTEXT:87, HATCH:73, CIRCLE:71  [niveles]
+    RLE-PILAR                               24  LINE:24  [pilares]
+    RLE-PROYECCION                          52  LINE:52
+    RLE-SOLID                               55  HATCH:55
+    RLE-TEXTO-1                             82  MTEXT:70, LINE:9, ARC:3
+    RLE-VIGA                                69  LINE:69  [vigas]
+
+  Capas clasificadas como estructurales:
+    [ejes] RLE-EJES
+    [ejes] RLE-EJE
+    [fundaciones] RLE-FUNDACION
+    [losas] RLE-LOSA
+    [muros] RLE-MURO
+    [niveles] RLA-NIVELES
+    [niveles] RLA-COTAS
+    [niveles] RLE-NIVELES
+    [niveles] RLA-COTAS1
+    [pilares] RLE-PILAR
+    [vigas] RLE-VIGA
+
+  Textos totales detectados: 339
+  Textos relevantes (plantas/niveles/cotas): 7
+    Capa                       Texto                                                         Posicion
+    --------------------------------------------------------------------------------------------------------------
+    RLA-TEXTOS2                PLANTA FUNDACIONES                                            (2589.62, 2862.12)
+    0                          (NIVEL SUPERIOR RADIER S/PLANTA )                             (2604.47, 2940.16)
+    RLA-TEXTOS-1               \pxl2.95,a0.83333;HORMIGÓN G35_10: (Desde fundaciones A Ci    (3732.40, 1267.52)
+    RLA-CORTES                 CORTE TIP. FUNDACIONES                                        (1077.09, 373.49)
+    RLA-CORTES                 RADIER                                                        (1202.54, 1017.62)
+    RLA-CORTES                 RADIER                                                        (2069.48, 1017.62)
+    RLE-TEXTO-1                LOSA e=25                                                     (1299.25, 5975.94)
+
+  Inserciones (INSERT) detectadas: 13
+    Capa                       Bloque                                    Posicion
+    ------------------------------------------------------------------------------------------
+    RLA-FORMATO                viñeta-rl                                 N/A
+    0                          Alfa                                      N/A
+    0                          Alfa                                      (-4630.63, 6737.61)
+    0                          Alfa                                      (2327.52, 18959.20)
+    0                          nivel-el                                  (1253.54, 1064.38)
+    0                          nivel-el                                  (1212.96, 689.38)
+    0                          nivel-el                                  (2109.69, 1064.38)
+    0                          nivel-el                                  (2079.91, 689.38)
+    0                          FLECHA                                    (1108.98, 1027.38)
+    0                          FLECHA                                    (1999.06, 1027.38)
+    RLA-TEXTOS1                FLECHA                                    (936.41, 680.99)
+    RLA-TEXTOS1                FLECHA                                    (1743.98, 680.99)
+    0                          A$C275F4B4F                               (3802.06, 4795.13)
+
+
+================================================================================
+  ARCHIVO: 2017_67-101.dxf
+================================================================================
+  SHA-256: 6c8550e28bbc12da5a0cb1b245aaf574cf6cdb0c66cbd0a2317c098a77d85465
+  Tamano:  4,193,185 bytes
+
+  Lectura DXF: OK
+  Unidades ($INSUNITS): Unspecified
+  Version DXF: AC1032
+
+  Extension geometrica (calculada manualmente):
+    Min: (-4630.6255, 0.0000, 0.0000)
+    Max: (6331.2904, 18959.1965, 0.0000)
+    Dimensiones: 10961.9158 x 18959.1965 x 0.0000
+
+  Total entidades (modelspace): 2280
+
+  Tipos de entidad (todas las capas):
+    Tipo                  Cantidad
+    --------------------------------
+    LINE                      1146
+    MTEXT                      504
+    TEXT                       217
+    DIMENSION                  123
+    CIRCLE                     108
+    HATCH                       88
+    ARC                         70
+    LWPOLYLINE                  12
+    INSERT                       7
+    SPLINE                       5
+
+  Bloques definidos (no anonimos): 3
+    - Alfa
+    - TICK1
+    - viñeta-rl
+
+  Bloques referenciados (INSERT):
+    - Alfa: 6 inserciones
+    - viñeta-rl: 1 inserciones
+
+  Capas y entidades por capa:
+    Capa                             Entidades  Tipos
+    --------------------------------------------------------------------------------
+    0                                       10  INSERT:6, TEXT:4
+    A-ANNO-TEXT                             32  LINE:32
+    CONTORNOS                               28  LINE:25, LWPOLYLINE:3
+    DEFPOINTS                              168  TEXT:94, LINE:56, HATCH:18
+    RLA-CORTES                              22  LINE:15, DIMENSION:4, TEXT:2, HATCH:1
+    RLA-COTAS                               90  DIMENSION:90  [niveles]
+    RLA-COTAS1                              29  DIMENSION:29  [niveles]
+    RLA-FORMATO                              9  LINE:5, TEXT:3, INSERT:1
+    RLA-HATCH2                               2  HATCH:2
+    RLA-LOSAS                              172  MTEXT:86, CIRCLE:43, LINE:43  [losas]
+    RLA-MURO DILATADO                        4  LINE:4  [muros]
+    RLA-MURO INV DILATADO                  104  LINE:104  [muros]
+    RLA-SEGMENTOS1                         120  LINE:120
+    RLA-TEXTOS1                            141  TEXT:88, LINE:53
+    RLA-TEXTOS2                             10  LINE:6, TEXT:4
+    RLE-EJE                                130  MTEXT:65, CIRCLE:65  [ejes]
+    RLE-EJES                                90  LINE:90  [ejes]
+    RLE-HATCH                               25  LINE:24, HATCH:1
+    RLE-LOSA                                27  LINE:25, LWPOLYLINE:2  [losas]
+    RLE-MURO                               137  LINE:136, LWPOLYLINE:1  [muros]
+    RLE-NIVELES                             12  MTEXT:12  [niveles]
+    RLE-PILAR                               94  LINE:94  [pilares]
+    RLE-PROYECCION                         140  LINE:81, ARC:48, LWPOLYLINE:6, SPLINE:5
+    RLE-SOLID                               66  HATCH:66
+    RLE-TEXTO-1                            407  MTEXT:341, TEXT:22, LINE:22, ARC:22
+    RLE-VANOS                               14  LINE:14
+    RLE-VIGA                               197  LINE:197  [vigas]
+
+  Capas clasificadas como estructurales:
+    [ejes] RLE-EJES
+    [ejes] RLE-EJE
+    [losas] RLE-LOSA
+    [losas] RLA-LOSAS
+    [muros] RLE-MURO
+    [muros] RLA-MURO DILATADO
+    [muros] RLA-MURO INV DILATADO
+    [niveles] RLA-COTAS
+    [niveles] RLA-COTAS1
+    [niveles] RLE-NIVELES
+    [pilares] RLE-PILAR
+    [vigas] RLE-VIGA
+
+  Textos totales detectados: 721
+  Textos relevantes (plantas/niveles/cotas): 13
+    Capa                       Texto                                                         Posicion
+    --------------------------------------------------------------------------------------------------------------
+    RLA-TEXTOS2                PLANTA CIELO 1º SUBTERRANEO                                   (2001.97, 5049.00)
+    RLA-TEXTOS2                PLANTA CIELO PISO 1º                                          (3052.03, 101.11)
+    0                          (NIVEL SUPERIOR LOSA -4.01 (S.I.C.))                          (2184.95, 5105.47)
+    0                          (NIVEL SUPERIOR LOSA -0.05)                                   (3161.52, 179.70)
+    RLE-NIVELES                RADIER SOBRE TERRENO                                          (5312.76, 3170.35)
+    RLE-NIVELES                RADIER SOBRE TERRENO                                          (5308.60, 2323.90)
+    RLE-NIVELES                RADIER SOBRE TERRENO                                          (5303.26, 1482.12)
+    0                          (LOSA e=15 (S.I.C.))                                          (2376.20, 5151.28)
+    0                          (LOSA e=15 (S.I.C.))                                          (3295.87, 232.94)
+    RLE-NIVELES                LOSA e=15                                                     (5163.46, 3813.27)
+    RLE-NIVELES                LOSA e=15                                                     (5448.73, 4426.14)
+    RLA-TEXTOS1                LOSA                                                          (5185.93, 6500.39)
+    RLA-TEXTOS1                LOSA                                                          (4339.10, 6500.39)
+
+  Inserciones (INSERT) detectadas: 7
+    Capa                       Bloque                                    Posicion
+    ------------------------------------------------------------------------------------------
+    RLA-FORMATO                viñeta-rl                                 N/A
+    0                          Alfa                                      N/A
+    0                          Alfa                                      (-4630.63, 6737.61)
+    0                          Alfa                                      (2327.52, 18959.20)
+    0                          Alfa                                      (6331.29, 10867.17)
+    0                          Alfa                                      (6331.29, 10867.17)
+    0                          Alfa                                      (-2902.66, 9358.29)
+
+
+================================================================================
+  ARCHIVO: 2017_67-102.dxf
+================================================================================
+  SHA-256: 4ce45122e81b1dcdffa204c70fb929d2cf0e23529a07eed685f69dd43b7275bf
+  Tamano:  4,478,272 bytes
+
+  Lectura DXF: OK
+  Unidades ($INSUNITS): Unspecified
+  Version DXF: AC1032
+
+  Extension geometrica (calculada manualmente):
+    Min: (-4630.6255, 0.0000, 0.0000)
+    Max: (9326.6483, 8617.5000, 0.0000)
+    Dimensiones: 13957.2737 x 8617.5000 x 0.0000
+
+  Total entidades (modelspace): 3038
+
+  Tipos de entidad (todas las capas):
+    Tipo                  Cantidad
+    --------------------------------
+    LINE                      1581
+    MTEXT                      671
+    TEXT                       231
+    ARC                        176
+    DIMENSION                  113
+    CIRCLE                      98
+    LWPOLYLINE                  90
+    HATCH                       70
+    INSERT                       8
+
+  Bloques definidos (no anonimos): 6
+    - Alfa
+    - RLA-VIGAS-CAJONES - V_M_ 300x300x5-394662-2º
+    - RLA-VIGAS-CAJONES - V_M_ 300x300x5-397154-2º
+    - RLA-VIGAS-CAJONES - V_M_ 300x300x5-438199-2º
+    - TICK1
+    - viñeta-rl
+
+  Bloques referenciados (INSERT):
+    - Alfa: 4 inserciones
+    - viñeta-rl: 1 inserciones
+    - RLA-VIGAS-CAJONES - V_M_ 300x300x5-397154-2º: 1 inserciones
+    - RLA-VIGAS-CAJONES - V_M_ 300x300x5-394662-2º: 1 inserciones
+    - RLA-VIGAS-CAJONES - V_M_ 300x300x5-438199-2º: 1 inserciones
+
+  Capas y entidades por capa:
+    Capa                             Entidades  Tipos
+    --------------------------------------------------------------------------------
+    0                                        9  INSERT:4, TEXT:4, LINE:1
+    A-ANNO-TEXT                             36  LINE:36
+    A-DETL-HLIN                              9  LINE:9
+    CONTORNOS                                1  LWPOLYLINE:1
+    DEFPOINTS                              168  TEXT:94, LINE:56, HATCH:18
+    RLA-CORTES                              22  LINE:15, DIMENSION:4, TEXT:2, HATCH:1
+    RLA-COTAS                               70  DIMENSION:70  [niveles]
+    RLA-COTAS1                              39  DIMENSION:39  [niveles]
+    RLA-FORMATO                              9  LINE:5, TEXT:3, INSERT:1
+    RLA-LOSAS                              188  MTEXT:94, CIRCLE:47, LINE:47  [losas]
+    RLA-TEXTOS1                            159  TEXT:100, LINE:59
+    RLA-TEXTOS2                             10  LINE:6, TEXT:4
+    RLE-EJE                                102  MTEXT:51, CIRCLE:51  [ejes]
+    RLE-EJES                                47  LINE:47  [ejes]
+    RLE-LOSA                                36  LINE:34, LWPOLYLINE:2  [losas]
+    RLE-MURO                                36  LINE:36  [muros]
+    RLE-PILAR                              196  LINE:172, ARC:24  [pilares]
+    RLE-PROYECCION                         979  LINE:761, ARC:128, LWPOLYLINE:87, INSERT:3
+    RLE-SOLID                               51  HATCH:51
+    RLE-TEXTO-1                            598  MTEXT:526, TEXT:24, LINE:24, ARC:24
+    RLE-VANOS                               33  LINE:33
+    RLE-VIGA                               237  LINE:237  [vigas]
+    S-COLS-IDEN                              3  LINE:3  [pilares]
+
+  Capas clasificadas como estructurales:
+    [ejes] RLE-EJES
+    [ejes] RLE-EJE
+    [losas] RLE-LOSA
+    [losas] RLA-LOSAS
+    [muros] RLE-MURO
+    [niveles] RLA-COTAS
+    [niveles] RLA-COTAS1
+    [pilares] RLE-PILAR
+    [pilares] S-COLS-IDEN
+    [vigas] RLE-VIGA
+
+  Textos totales detectados: 902
+  Textos relevantes (plantas/niveles/cotas): 8
+    Capa                       Texto                                                         Posicion
+    --------------------------------------------------------------------------------------------------------------
+    RLA-TEXTOS2                PLANTA CIELO PISO 2º                                          (2754.22, 5091.14)
+    RLA-TEXTOS2                PLANTA CIELO PISO 3º                                          (2778.48, 1480.23)
+    0                          (NIVEL SUPERIOR LOSA +3.91)                                   (2866.98, 5167.76)
+    0                          (NIVEL SUPERIOR LOSA +7.87)                                   (2903.80, 1556.84)
+    0                          (LOSA e=15 (S.I.C.))                                          (2964.14, 5216.12)
+    0                          (LOSA e=15 (S.I.C.))                                          (2977.13, 1604.75)
+    RLA-TEXTOS1                LOSA                                                          (4613.74, 1316.62)
+    RLA-TEXTOS1                LOSA                                                          (3832.74, 1316.62)
+
+  Inserciones (INSERT) detectadas: 8
+    Capa                       Bloque                                    Posicion
+    ------------------------------------------------------------------------------------------
+    RLA-FORMATO                viñeta-rl                                 N/A
+    0                          Alfa                                      N/A
+    0                          Alfa                                      (-4630.63, 6737.61)
+    RLE-PROYECCION             RLA-VIGAS-CAJONES - V_M_ 300x300x5-397154-2º  (2929.49, 3850.15)
+    RLE-PROYECCION             RLA-VIGAS-CAJONES - V_M_ 300x300x5-394662-2º  (2929.49, 3850.15)
+    RLE-PROYECCION             RLA-VIGAS-CAJONES - V_M_ 300x300x5-438199-2º  (2929.49, 3850.15)
+    0                          Alfa                                      (9326.65, 1166.15)
+    0                          Alfa                                      (9326.65, 1166.15)
+
+
+================================================================================
+  ARCHIVO: 2017_67-103.dxf
+================================================================================
+  SHA-256: 05d9b5ee23bdd2da7cab767f51d382d74af73dc0b36613b0129f26b9bb3ed724
+  Tamano:  3,710,918 bytes
+
+  Lectura DXF: OK
+  Unidades ($INSUNITS): Unspecified
+  Version DXF: AC1032
+
+  Extension geometrica (calculada manualmente):
+    Min: (-4630.6255, -700.4587, 0.0000)
+    Max: (6082.5000, 8617.5000, 0.0000)
+    Dimensiones: 10713.1255 x 9317.9587 x 0.0000
+
+  Total entidades (modelspace): 1681
+
+  Tipos de entidad (todas las capas):
+    Tipo                  Cantidad
+    --------------------------------
+    LINE                       884
+    MTEXT                      387
+    TEXT                       167
+    ARC                         73
+    CIRCLE                      53
+    HATCH                       46
+    DIMENSION                   42
+    LWPOLYLINE                  19
+    INSERT                      10
+
+  Bloques definidos (no anonimos): 9
+    - Alfa
+    - FP_1-3º
+    - FP_2-3º
+    - FP_3-3º
+    - FP_4-3º
+    - FP_5-3º
+    - FP_6-3º
+    - TICK1
+    - viñeta-rl
+
+  Bloques referenciados (INSERT):
+    - Alfa: 3 inserciones
+    - viñeta-rl: 1 inserciones
+    - FP_1-3º: 1 inserciones
+    - FP_2-3º: 1 inserciones
+    - FP_3-3º: 1 inserciones
+    - FP_4-3º: 1 inserciones
+    - FP_5-3º: 1 inserciones
+    - FP_6-3º: 1 inserciones
+
+  Capas y entidades por capa:
+    Capa                             Entidades  Tipos
+    --------------------------------------------------------------------------------
+    0                                        5  INSERT:3, TEXT:2
+    A-ANNO-TEXT                             29  LINE:29
+    DEFPOINTS                              168  TEXT:94, LINE:56, HATCH:18
+    RLA-COTAS                               35  DIMENSION:35  [niveles]
+    RLA-COTAS1                               7  DIMENSION:7  [niveles]
+    RLA-FORMATO                              9  LINE:5, TEXT:3, INSERT:1
+    RLA-LOSAS                              108  MTEXT:54, CIRCLE:27, LINE:27  [losas]
+    RLA-MURO INV DILATADO                  285  LINE:285  [muros]
+    RLA-TEXTOS1                             90  TEXT:57, LINE:33
+    RLA-TEXTOS2                              5  LINE:3, TEXT:2
+    RLE-EJE                                 52  MTEXT:26, CIRCLE:26  [ejes]
+    RLE-EJES                                21  LINE:21  [ejes]
+    RLE-LOSA                                50  LINE:50  [losas]
+    RLE-MURO                                18  LINE:18  [muros]
+    RLE-PILAR                              200  LINE:136, ARC:64  [pilares]
+    RLE-PROYECCION                          19  LINE:13, LWPOLYLINE:6
+    RLE-SOLID                               36  HATCH:28, INSERT:6, LINE:2
+    RLE-TEXTO-1                            336  MTEXT:307, LINE:11, TEXT:9, ARC:9
+    RLE-VANOS                               53  LINE:53
+    RLE-VIGA                               146  LINE:134, LWPOLYLINE:12  [vigas]
+    S-COLS-IDEN                              8  LINE:8  [pilares]
+    TEXTOS1                                  1  LWPOLYLINE:1
+
+  Capas clasificadas como estructurales:
+    [ejes] RLE-EJES
+    [ejes] RLE-EJE
+    [losas] RLE-LOSA
+    [losas] RLA-LOSAS
+    [muros] RLE-MURO
+    [muros] RLA-MURO INV DILATADO
+    [niveles] RLA-COTAS
+    [niveles] RLA-COTAS1
+    [pilares] RLE-PILAR
+    [pilares] S-COLS-IDEN
+    [vigas] RLE-VIGA
+
+  Textos totales detectados: 554
+  Textos relevantes (plantas/niveles/cotas): 4
+    Capa                       Texto                                                         Posicion
+    --------------------------------------------------------------------------------------------------------------
+    RLA-TEXTOS2                PLANTA CIELO PISO 4º                                          (2629.26, 3445.66)
+    0                          (NIVEL SUPERIOR LOSA +11.83)                                  (2742.05, 3517.99)
+    0                          (LOSA e=15 (S.I.C.))                                          (2853.64, 3563.45)
+    RLA-TEXTOS1                LOSA                                                          (4290.01, 2437.55)
+
+  Inserciones (INSERT) detectadas: 10
+    Capa                       Bloque                                    Posicion
+    ------------------------------------------------------------------------------------------
+    RLA-FORMATO                viñeta-rl                                 N/A
+    0                          Alfa                                      N/A
+    0                          Alfa                                      (-4630.63, 6737.61)
+    RLE-SOLID                  FP_1-3º                                   (2884.85, 5868.98)
+    RLE-SOLID                  FP_2-3º                                   (2884.85, 5868.98)
+    RLE-SOLID                  FP_3-3º                                   (2884.85, 5868.98)
+    RLE-SOLID                  FP_4-3º                                   (2884.85, 5868.98)
+    RLE-SOLID                  FP_5-3º                                   (2884.85, 5868.98)
+    RLE-SOLID                  FP_6-3º                                   (2884.85, 5868.98)
+    0                          Alfa                                      (1518.59, -700.46)
+
+
+
+================================================================================
+  VERIFICACIONES
+================================================================================
+
+  V1 — Archivos legibles: 4/4
+    OK — Todos los archivos se leyeron correctamente
+
+  V2 — Integridad de archivos originales:
+    OK — Los hashes SHA-256 no cambiaron
+
+  V3 — Reporte completo: 4/4 archivos
+    OK — El reporte contiene resultados para los 4 archivos
+
+
+================================================================================
+  TABLA RESUMEN
+================================================================================
+
+  Archivo                 Unidades             Entidades   Capas   Textos   INSERTs
+  --------------------------------------------------------------------------------
+  2017_67-100.dxf         Unspecified               1829      24      339        13
+  2017_67-101.dxf         Unspecified               2280      27      721         7
+  2017_67-102.dxf         Unspecified               3038      23      902         8
+  2017_67-103.dxf         Unspecified               1681      22      554        10

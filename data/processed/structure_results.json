@@ -1,0 +1,627 @@
+{
+  "source": "data/processed/building_3d_aligned.json",
+  "q_G": {
+    "espesor_losa_m": 0.15,
+    "fuente_espesor": "PLANOS/BENCHMARK",
+    "gamma_concreto_kN_m3": 25.0,
+    "fuente_gamma": "BENCHMARK",
+    "terminaciones_kN_m2": 0.0,
+    "fuente_terminaciones": "INPUT_REQUIRED (sin valor confirmado)",
+    "q_G_kN_m2": 3.75,
+    "status": "PROVISIONAL"
+  },
+  "modelo": {
+    "n_nodes": 187,
+    "n_elements": 241,
+    "n_columns": 48,
+    "n_beams": 175,
+    "n_walls": 18,
+    "n_diaphragms": 4,
+    "n_base_fixed": 16,
+    "muros_solo_carga_sin_rigidez": 13,
+    "vigas_solo_carga_sin_rigidez": 3
+  },
+  "muros_solo_carga": {
+    "concepto": "muros apoyados en losa sin conexion a reticola: sin rigidez FE, peso transferido a vigas reales proximas, geometria trazada en physical_beam_map",
+    "lista": {
+      "P1/0": {
+        "kind": "beam",
+        "x1": 34.6271,
+        "y1": -19.1123,
+        "x2": 40.0,
+        "y2": -19.1123,
+        "length_m": 5.372900000000001,
+        "level": "P1"
+      },
+      "P1/6": {
+        "kind": "beam",
+        "x1": 37.6499,
+        "y1": -19.0123,
+        "x2": 37.6499,
+        "y2": -16.77,
+        "length_m": 2.2423,
+        "level": "P1"
+      },
+      "P1/7": {
+        "kind": "wall",
+        "x1": 3.15,
+        "y1": -14.095,
+        "x2": 6.85,
+        "y2": -14.095,
+        "length_m": 3.6999999999999997,
+        "level": "P1"
+      },
+      "P1/8": {
+        "kind": "wall",
+        "x1": -0.35,
+        "y1": -4.15,
+        "x2": 6.6,
+        "y2": -4.15,
+        "length_m": 6.949999999999999,
+        "level": "P1"
+      },
+      "P1/14": {
+        "kind": "wall",
+        "x1": 3.275,
+        "y1": -14.195,
+        "x2": 3.275,
+        "y2": -12.5162,
+        "length_m": 1.6788000000000007,
+        "level": "P1"
+      },
+      "P1/15": {
+        "kind": "wall",
+        "x1": 6.725,
+        "y1": -14.195,
+        "x2": 6.725,
+        "y2": -12.5162,
+        "length_m": 1.6788000000000007,
+        "level": "P1"
+      },
+      "P2/34": {
+        "kind": "beam",
+        "x1": 25.0,
+        "y1": -16.0998,
+        "x2": 25.0,
+        "y2": -9.4498,
+        "length_m": 6.649999999999999,
+        "level": "P2"
+      },
+      "P2/45": {
+        "kind": "wall",
+        "x1": 3.15,
+        "y1": -14.095,
+        "x2": 6.85,
+        "y2": -14.095,
+        "length_m": 3.6999999999999997,
+        "level": "P2"
+      },
+      "P2/47": {
+        "kind": "wall",
+        "x1": 3.275,
+        "y1": -14.195,
+        "x2": 3.275,
+        "y2": -12.5162,
+        "length_m": 1.6788000000000007,
+        "level": "P2"
+      },
+      "P2/48": {
+        "kind": "wall",
+        "x1": 6.725,
+        "y1": -14.195,
+        "x2": 6.725,
+        "y2": -12.5162,
+        "length_m": 1.6788000000000007,
+        "level": "P2"
+      },
+      "P3/49": {
+        "kind": "wall",
+        "x1": 3.15,
+        "y1": -14.094999999999999,
+        "x2": 6.85,
+        "y2": -14.094999999999999,
+        "length_m": 3.6999999999999997,
+        "level": "P3"
+      },
+      "P3/51": {
+        "kind": "wall",
+        "x1": 3.275,
+        "y1": -14.195,
+        "x2": 3.275,
+        "y2": -12.5162,
+        "length_m": 1.6788000000000007,
+        "level": "P3"
+      },
+      "P3/52": {
+        "kind": "wall",
+        "x1": 6.725,
+        "y1": -14.195,
+        "x2": 6.725,
+        "y2": -12.5162,
+        "length_m": 1.6788000000000007,
+        "level": "P3"
+      },
+      "P4/44": {
+        "kind": "wall",
+        "x1": 3.15,
+        "y1": -14.094999999999999,
+        "x2": 6.85,
+        "y2": -14.094999999999999,
+        "length_m": 3.6999999999999997,
+        "level": "P4"
+      },
+      "P4/46": {
+        "kind": "wall",
+        "x1": 3.275,
+        "y1": -14.195,
+        "x2": 3.275,
+        "y2": -12.5162,
+        "length_m": 1.6788000000000007,
+        "level": "P4"
+      },
+      "P4/49": {
+        "kind": "wall",
+        "x1": 6.725,
+        "y1": -14.195,
+        "x2": 6.725,
+        "y2": -12.5162,
+        "length_m": 1.6788000000000007,
+        "level": "P4"
+      }
+    }
+  },
+  "verificaciones_modelo": {
+    "nodos_duplicados": {
+      "state": "OK",
+      "detail": "0 dup"
+    },
+    "longitud_cero": {
+      "state": "OK",
+      "detail": "0"
+    },
+    "elementos_desconectados": {
+      "state": "OK",
+      "detail": "0 nodos sin ruta a base fija"
+    },
+    "vigas_incorporadas": {
+      "state": "OK",
+      "detail": "143/145"
+    },
+    "muros_incorporados": {
+      "state": "WARNING",
+      "detail": "22/25"
+    },
+    "continuidad_P1-P4": {
+      "state": "OK",
+      "detail": "16/16 pilares P1 alcanzan P4 (P1=16, P2=18, P3=18, P4=18)"
+    }
+  },
+  "losas": [
+    {
+      "slab_id": "SL-P1-01",
+      "level": "P1",
+      "polygon": [
+        [
+          -0.0,
+          -16.4
+        ],
+        [
+          45.0,
+          -16.4
+        ],
+        [
+          45.0,
+          -0.25
+        ],
+        [
+          -0.0,
+          -0.25
+        ]
+      ],
+      "area_m2": 726.75,
+      "thickness_m": 0.15,
+      "self_weight_kN_m2": 3.75,
+      "finishes_kN_m2": 0.0,
+      "q_G_kN_m2": 3.75,
+      "status": "PROVISIONAL",
+      "source": "casco convexo reticula pilares v2 (losas DXF parciales)"
+    },
+    {
+      "slab_id": "SL-P2-01",
+      "level": "P2",
+      "polygon": [
+        [
+          -0.0,
+          -16.4
+        ],
+        [
+          45.0,
+          -16.4
+        ],
+        [
+          45.0,
+          -0.25
+        ],
+        [
+          -0.0,
+          -0.25
+        ]
+      ],
+      "area_m2": 726.75,
+      "thickness_m": 0.15,
+      "self_weight_kN_m2": 3.75,
+      "finishes_kN_m2": 0.0,
+      "q_G_kN_m2": 3.75,
+      "status": "PROVISIONAL",
+      "source": "casco convexo reticula pilares v2 (losas DXF parciales)"
+    },
+    {
+      "slab_id": "SL-P3-01",
+      "level": "P3",
+      "polygon": [
+        [
+          -0.0,
+          -16.4
+        ],
+        [
+          45.0,
+          -16.4
+        ],
+        [
+          45.0,
+          -0.25
+        ],
+        [
+          -0.0,
+          -0.25
+        ]
+      ],
+      "area_m2": 726.75,
+      "thickness_m": 0.15,
+      "self_weight_kN_m2": 3.75,
+      "finishes_kN_m2": 0.0,
+      "q_G_kN_m2": 3.75,
+      "status": "PROVISIONAL",
+      "source": "casco convexo reticula pilares v2 (losas DXF parciales)"
+    },
+    {
+      "slab_id": "SL-P4-01",
+      "level": "P4",
+      "polygon": [
+        [
+          -0.0,
+          -16.4
+        ],
+        [
+          45.0,
+          -16.4
+        ],
+        [
+          45.0,
+          -0.25
+        ],
+        [
+          -0.0,
+          -0.25
+        ]
+      ],
+      "area_m2": 726.75,
+      "thickness_m": 0.15,
+      "self_weight_kN_m2": 3.75,
+      "finishes_kN_m2": 0.0,
+      "q_G_kN_m2": 3.75,
+      "status": "PROVISIONAL",
+      "source": "casco convexo reticula pilares v2 (losas DXF parciales)"
+    }
+  ],
+  "areas_tributarias": {
+    "method": "malla fina 0.25m; punto->viga mas cercana; poligono ortogonal",
+    "per_level": {
+      "P1": {
+        "A_losa": 726.75,
+        "A_trib": 731.25,
+        "error_area": 0.006191950464396285,
+        "carga_esperada": 2725.31,
+        "carga_transferida": 2742.19,
+        "error_carga": 0.006191950464396285,
+        "q_G_kN_m2": 3.75
+      },
+      "P2": {
+        "A_losa": 726.75,
+        "A_trib": 731.25,
+        "error_area": 0.006191950464396285,
+        "carga_esperada": 2725.31,
+        "carga_transferida": 2742.19,
+        "error_carga": 0.006191950464396285,
+        "q_G_kN_m2": 3.75
+      },
+      "P3": {
+        "A_losa": 726.75,
+        "A_trib": 731.25,
+        "error_area": 0.006191950464396285,
+        "carga_esperada": 2725.31,
+        "carga_transferida": 2742.19,
+        "error_carga": 0.006191950464396285,
+        "q_G_kN_m2": 3.75
+      },
+      "P4": {
+        "A_losa": 726.75,
+        "A_trib": 731.25,
+        "error_area": 0.006191950464396285,
+        "carga_esperada": 2725.31,
+        "carga_transferida": 2742.19,
+        "error_carga": 0.006191950464396285,
+        "q_G_kN_m2": 3.75
+      }
+    },
+    "beam_load_kN": {
+      "52": 150.234,
+      "53": 1414.688,
+      "72": 91.406,
+      "73": 21.953,
+      "74": 9.688,
+      "75": 7.031,
+      "76": 25.781,
+      "77": 25.781,
+      "78": 25.781,
+      "79": 25.781,
+      "80": 25.781,
+      "81": 179.062,
+      "82": 46.875,
+      "83": 17.057,
+      "84": 19.506,
+      "85": 46.875,
+      "86": 46.875,
+      "87": 46.875,
+      "88": 46.875,
+      "89": 46.875,
+      "90": 97.031,
+      "91": 25.781,
+      "92": 25.781,
+      "93": 25.781,
+      "94": 25.781,
+      "95": 25.781,
+      "96": 25.781,
+      "97": 25.781,
+      "98": 49.219,
+      "99": 43.594,
+      "100": 28.125,
+      "103": 93.75,
+      "104": 130.312,
+      "105": 72.656,
+      "106": 117.188,
+      "108": 56.016,
+      "110": 72.656,
+      "111": 117.188,
+      "114": 117.188,
+      "116": 89.062,
+      "117": 117.188,
+      "118": 89.062,
+      "119": 117.188,
+      "120": 89.062,
+      "121": 117.188,
+      "122": 44.531,
+      "123": 58.594,
+      "139": 91.406,
+      "140": 4.688,
+      "141": 11.447,
+      "142": 22.772,
+      "143": 25.781,
+      "144": 25.781,
+      "145": 25.781,
+      "146": 25.781,
+      "147": 24.844,
+      "149": 179.062,
+      "150": 17.243,
+      "151": 19.554,
+      "152": 46.875,
+      "153": 46.875,
+      "154": 46.875,
+      "155": 46.875,
+      "156": 46.875,
+      "157": 46.875,
+      "159": 97.031,
+      "160": 25.781,
+      "161": 25.781,
+      "162": 25.781,
+      "163": 25.781,
+      "164": 25.781,
+      "165": 25.781,
+      "166": 25.781,
+      "168": 49.219,
+      "169": 43.594,
+      "170": 28.125,
+      "172": 72.656,
+      "173": 130.312,
+      "175": 56.016,
+      "176": 76.875,
+      "177": 117.188,
+      "179": 89.062,
+      "180": 117.188,
+      "181": 89.062,
+      "182": 117.188,
+      "185": 89.062,
+      "186": 117.188,
+      "187": 89.062,
+      "188": 117.188,
+      "189": 90.0,
+      "190": 117.188,
+      "191": 44.531,
+      "192": 58.594,
+      "209": 91.406,
+      "210": 25.781,
+      "211": 25.781,
+      "212": 25.781,
+      "213": 25.781,
+      "214": 25.781,
+      "215": 25.781,
+      "216": 25.781,
+      "218": 179.062,
+      "219": 46.875,
+      "220": 46.875,
+      "221": 46.875,
+      "222": 46.875,
+      "223": 46.875,
+      "224": 46.875,
+      "225": 46.875,
+      "227": 97.031,
+      "228": 25.781,
+      "229": 25.781,
+      "230": 25.781,
+      "231": 25.781,
+      "232": 25.781,
+      "233": 25.781,
+      "234": 25.781,
+      "236": 49.219,
+      "237": 43.594,
+      "238": 28.125,
+      "239": 93.75,
+      "240": 130.312,
+      "241": 89.062,
+      "242": 117.188,
+      "244": 89.062,
+      "245": 117.188,
+      "246": 89.062,
+      "247": 117.188,
+      "249": 89.062,
+      "250": 117.188,
+      "251": 89.062,
+      "252": 117.188,
+      "253": 89.062,
+      "254": 117.188,
+      "255": 44.531,
+      "256": 58.594
+    }
+  },
+  "peso_propio": {
+    "columnas_kN": 2328.480000000001,
+    "vigas_kN": 11804.34536191907,
+    "muros_kN": 1346.5845880543752,
+    "total_kN": 15479.409949973446
+  },
+  "carga_gravitacional": {
+    "peso_propio_kN": 15479.409949973446,
+    "carga_losa_kN": 10351.632000000001,
+    "total_aplicada_kN": 25831.04194997345,
+    "q_G_kN_m2": 3.75
+  },
+  "analisis": {
+    "convergio": true,
+    "retcode": 0
+  },
+  "reacciones": {
+    "n_reacciones": 16,
+    "fx": -3.410605131648481e-12,
+    "fy": 1.1806999822283615e-11,
+    "fz": 25831.04195046313,
+    "mx": 4586.878671774082,
+    "my": 28782.97095078968,
+    "mz": -23.081568915160098
+  },
+  "desplazamiento_maximo": {
+    "u1": 0.001332564306466087,
+    "u2": 0.00166363208047551,
+    "u3": 0.14817465717702966
+  },
+  "verificaciones_diafragma": {
+    "P1": {
+      "state": "OK",
+      "master": 1,
+      "n_slaves": 23,
+      "n_floor_nodes": 24,
+      "compat_horiz_max_m": 0.0,
+      "uz_esclavo_max_m": 0.14817465717702966,
+      "uz_dof": "libre (rigidDiaphragm restringe solo dofs 1,2,6)"
+    },
+    "P2": {
+      "state": "OK",
+      "master": 17,
+      "n_slaves": 50,
+      "n_floor_nodes": 51,
+      "compat_horiz_max_m": 0.0,
+      "uz_esclavo_max_m": 0.12089798108103318,
+      "uz_dof": "libre (rigidDiaphragm restringe solo dofs 1,2,6)"
+    },
+    "P3": {
+      "state": "OK",
+      "master": 35,
+      "n_slaves": 58,
+      "n_floor_nodes": 59,
+      "compat_horiz_max_m": 0.0,
+      "uz_esclavo_max_m": 0.11805366432624774,
+      "uz_dof": "libre (rigidDiaphragm restringe solo dofs 1,2,6)"
+    },
+    "P4": {
+      "state": "OK",
+      "master": 53,
+      "n_slaves": 52,
+      "n_floor_nodes": 53,
+      "compat_horiz_max_m": 0.0,
+      "uz_esclavo_max_m": 0.1243205832315754,
+      "uz_dof": "libre (rigidDiaphragm restringe solo dofs 1,2,6)"
+    }
+  },
+  "verificaciones_analisis": {
+    "convergencia": {
+      "state": "OK",
+      "detail": "analyze retcode=0"
+    },
+    "peso_propio": {
+      "state": "OK",
+      "detail": "columnas=2328.5 vigas=11804.3 muros=1346.6 total=15479.4 kN"
+    },
+    "carga_losa": {
+      "state": "OK",
+      "detail": "total trasferido a vigas=10351.6 kN"
+    },
+    "carga_gravitacional_total": {
+      "state": "OK",
+      "detail": "25831.0 kN"
+    },
+    "equilibrio_vertical": {
+      "state": "OK",
+      "detail": "reacciones Fz=25831.0 vs aplicada=25831.0 err=0.000%"
+    },
+    "equilibrio_horizontal": {
+      "state": "OK",
+      "detail": "fx=-0.000000 fy=0.000000"
+    },
+    "por_piso": {
+      "P1": {
+        "A_losa_m2": 726.75,
+        "A_trib_m2": 731.25,
+        "error_area_%": 0.619,
+        "carga_esperada_kN": 2725.31,
+        "carga_transferida_kN": 2742.19,
+        "error_carga_%": 0.619
+      },
+      "P2": {
+        "A_losa_m2": 726.75,
+        "A_trib_m2": 731.25,
+        "error_area_%": 0.619,
+        "carga_esperada_kN": 2725.31,
+        "carga_transferida_kN": 2742.19,
+        "error_carga_%": 0.619
+      },
+      "P3": {
+        "A_losa_m2": 726.75,
+        "A_trib_m2": 731.25,
+        "error_area_%": 0.619,
+        "carga_esperada_kN": 2725.31,
+        "carga_transferida_kN": 2742.19,
+        "error_carga_%": 0.619
+      },
+      "P4": {
+        "A_losa_m2": 726.75,
+        "A_trib_m2": 731.25,
+        "error_area_%": 0.619,
+        "carga_esperada_kN": 2725.31,
+        "carga_transferida_kN": 2742.19,
+        "error_carga_%": 0.619
+      }
+    }
+  },
+  "figuras": {
+    "tributary_areas": "figures/tributary_areas.png"
+  }
+}

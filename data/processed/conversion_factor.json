@@ -1,0 +1,13 @@
+{
+  "factor_cad_to_m": 0.01,
+  "cad_units_per_meter": 100.0,
+  "evidence": [
+    "Pilares cuadrados 70 CAD = 0.70 m",
+    "Ancho vigas 20 CAD = 0.20 m",
+    "Espesor muros 20 CAD = 0.20 m",
+    "Separacion ejes E-F = 1000 CAD = 10.00 m",
+    "Largo vigas 930 CAD = 9.30 m (entre caras pilar)",
+    "Bloques nivel-el diametro ~88 CAD = ~0.88 m",
+    "Bloques vigas de cajon 300x300 = 0.30x0.30 m"
+  ]
+}

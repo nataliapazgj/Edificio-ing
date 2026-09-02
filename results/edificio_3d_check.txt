@@ -1,0 +1,13 @@
+Verificaciones - Visor 3D independiente (figures/edificio_3d_*.{html,png})
+Fuente: data\processed\unity_model.json
+
+[PASS] niveles -> levels=['P1', 'P2', 'P3', 'P4']
+[PASS] conteo_elementos -> fuente=257 grupos=257
+[PASS] nan_inf -> coincidencias=0
+[PASS] longitud_cero -> elementos longitud cero=0
+[PASS] unidades_metros -> rango x[-0.35,49.90] y[-20.82,3.33] z[-0.05,11.83]
+[PASS] html_generado -> size=4446536 b
+[PASS] html_self_contained -> sin dependencias externas (plotly.js embebido)
+[PASS] png_generado -> size=752271 b
+
+VEREDICTO: PASS
