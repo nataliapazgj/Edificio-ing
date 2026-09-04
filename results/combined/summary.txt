@@ -19,7 +19,7 @@ VERIFICACIONES PREVIAS:
   [OK] tags_nodo_duplicados: 442 nodos, 0 tags dup
   [OK] tags_elemento_duplicados: 602 elementos, 0 tags dup
   [OK] longitud_cero: 0 elementos con L=0
-  [FALLO] elementos_duplicados: 17 pares de nodos con >1 elemento (hereda de LT1; no bloquea)
+  [FALLO] elementos_duplicados: 17 pares de nodos con >1 elemento (no bloquea: heredado de LT1)
   [OK] ref_nodos_inexistentes: 0 refs malas
   [OK] master_existente_1002: master 1002 existe
   [OK] master_existente_1003: master 1003 existe

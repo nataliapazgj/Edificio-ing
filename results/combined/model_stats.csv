@@ -22,7 +22,7 @@ check_nodos_duplicados_geometricos,OK|0 nodos en misma coord
 check_tags_nodo_duplicados,"OK|442 nodos, 0 tags dup"
 check_tags_elemento_duplicados,"OK|602 elementos, 0 tags dup"
 check_longitud_cero,OK|0 elementos con L=0
-check_elementos_duplicados,FALLO|17 pares de nodos con >1 elemento (hereda de LT1; no bloquea)
+check_elementos_duplicados,FALLO|17 pares de nodos con >1 elemento (no bloquea: heredado de LT1)
 check_ref_nodos_inexistentes,OK|0 refs malas
 check_master_existente_1002,OK|master 1002 existe
 check_master_existente_1003,OK|master 1003 existe
